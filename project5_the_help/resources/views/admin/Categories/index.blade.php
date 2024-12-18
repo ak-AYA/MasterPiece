@@ -109,7 +109,7 @@
                     <td>{{ $category->description }}</td>
                     <td>
                         @if($category->image)
-                        <img src="{{ asset('storage/categories/' . $category->image) ?? asset('images/default-category.png') }}" alt="Category Image" class="img-80">
+                        <img src="{{ $category->image ? asset('storage/' . $category->image) : asset('images/default-category.png') }}" alt="Category Image" class="img-80">
                         @else
                         <span>No image</span>
                         @endif

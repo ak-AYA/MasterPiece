@@ -104,31 +104,31 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- In your Discount Table -->
-                @foreach($discounts as $discount)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $discount->code }}</td>
-                    <td>{{ $discount->amount }}</td>
-                    <td>{{ date('Y-m-d', strtotime($discount->start_date)) }}</td>
-<td>{{ date('Y-m-d', strtotime($discount->end_date)) }}</td>
+            @foreach($discounts as $discount)
+<tr>
+    <td>{{ $loop->iteration }}</td>
+    <td>{{ $discount->code }}</td>
+    <td>{{ $discount->amount }}</td>
+    <td>{{ date('Y-m-d', strtotime($discount->date_start)) }}</td>
+    <td>{{ date('Y-m-d', strtotime($discount->date_end)) }}</td>
 
-                    <td>
-                        @if($discount->status)
-                        <i class="fas fa-check-circle text-success"></i>
-                        @else
-                        <i class="fas fa-times-circle text-warning"></i>
-                        @endif
-                    </td>
-                    <td>
-                        <i class="fas fa-edit icon-btn" data-bs-toggle="modal" data-bs-target="#editDiscountModal"
-                            data-id="{{ $discount->id }}" data-code="{{ $discount->code }}"
-                            data-amount="{{ $discount->amount }}" data-start_date="{{ $discount->start_date }}"
-                            data-end_date="{{ $discount->end_date }}" data-status="{{ $discount->status }}"></i>
+    <td>
+        @if($discount->status)
+        <i class="fas fa-check-circle text-success"></i>
+        @else
+        <i class="fas fa-times-circle text-warning"></i>
+        @endif
+    </td>
+    <td>
+        <i class="fas fa-edit icon-btn" data-bs-toggle="modal" data-bs-target="#editDiscountModal"
+            data-id="{{ $discount->id }}" data-code="{{ $discount->code }}"
+            data-amount="{{ $discount->amount }}" data-start_date="{{ $discount->date_start }}"
+            data-end_date="{{ $discount->date_end }}" data-status="{{ $discount->status }}"></i>
 
-                    </td>
-                </tr>
-                @endforeach
+    </td>
+</tr>
+@endforeach
+
 
             </tbody>
 

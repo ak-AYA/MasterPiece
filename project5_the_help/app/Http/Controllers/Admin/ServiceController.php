@@ -5,7 +5,7 @@ use App\Models\Service;
 use App\Models\Provider;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Categories;
+use App\Models\category;
 
 class ServiceController extends Controller
 {
@@ -15,9 +15,9 @@ class ServiceController extends Controller
         // Eager load the provider and category relationships with services
         $services = Service::with(['provider', 'category'])->paginate(10);  // This ensures 'provider' and 'category' data are loaded with services
         $providers = Provider::all();
-        $categories = Categories::all();  // Corrected the variable name from $catigories to $categories
+        $categories = category::all();  // Corrected the variable name from $catigories to $category
 
-        return view('admin.services.index', compact('services', 'providers', 'categories'));  // Pass categories to the view
+        return view('admin.services.index', compact('services', 'providers', 'categories'));  // Pass category to the view
     }
 
     // Store a new service
@@ -29,7 +29,7 @@ class ServiceController extends Controller
             'duration' => 'required|string|max:100',
             'price' => 'required|numeric',
             'provider_id' => 'required|exists:providers,id',
-            'category_id' => 'required|exists:categories,id', // Added category_id validation
+            'category_id' => 'required|exists:category,id', // Added category_id validation
             'status' => 'required|boolean', // Added status validation
         ]);
 

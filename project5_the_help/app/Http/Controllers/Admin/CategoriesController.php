@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Categories;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Support\Facades\Storage;
 
 class CategoriesController extends Controller
@@ -12,7 +13,7 @@ class CategoriesController extends Controller
     // Display list of categories
     public function index()
     {
-        $categories = Categories::paginate(10);  // Paginate categories
+        $categories = Category::paginate(10);  // Paginate categories
         return view('admin.categories.index', compact('categories'));
     }
 
@@ -33,7 +34,7 @@ class CategoriesController extends Controller
             $imagePath = $request->file('image')->store('categories', 'public');
         }
 
-        Categories::create([
+        Category::create([
             'name' => $validated['name'],
             'description' => $validated['description'],
             'image' => $imagePath,
@@ -49,11 +50,11 @@ class CategoriesController extends Controller
         $validated = $request->validate([
             'name' => 'string|max:255',
             'description' => 'nullable|string|max:500',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'status' => 'required|boolean',
         ]);
 
-        $category = Categories::findOrFail($request->id);
+        $category = Category::findOrFail($request->id);
 
         // Handle image update
         if ($request->hasFile('image')) {
@@ -77,7 +78,7 @@ class CategoriesController extends Controller
     // Delete a category
     public function delete($id)
     {
-        $category = Categories::findOrFail($id);
+        $category = Category::findOrFail($id);
 
         // Delete the associated image if it exists
         if ($category->image) {
@@ -92,7 +93,7 @@ class CategoriesController extends Controller
     // Toggle category status
     public function toggleStatus($id)
     {
-        $category = Categories::findOrFail($id);
+        $category = Category::findOrFail($id);
         $category->status = !$category->status;  // Toggle the status
         $category->save();
 

@@ -24,4 +24,9 @@ class Provider extends Model
     return $this->hasMany(Service::class);
 }
 
+public function reviews()
+{
+    return $this->hasMany(Review::class, 'provider_id'); 
+}
+
 }

@@ -4,20 +4,55 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\WebsiteController;
+use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\BookingController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\ProviderController;
+use App\Http\Controllers\ServiceDetailsController;
 use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\Categoriescontroller;
 
 
-Route::get('/', function () {
-    return view('welcome');
+
+// -------------
+
+Route::controller(WebsiteController::class)->name('website.')->group(function () {
+    Route::get('/', [WebsiteController::class, 'index'])->name('index');
+    
+    Route::controller(ServicesController::class)->name('services.')->group(function () {
+        Route::get('/services', 'index')->name('index');
+        Route::get('/services/category/{id}', 'showServicesByCategory')->name('category');
+        
+        Route::get('/services/{id}', [ServiceDetailsController::class, 'show'])->name('details');
+    });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 
@@ -76,6 +111,6 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
     Route::get('/bookings/{id}/delete', [BookingController::class, 'delete'])->name('bookings.delete');
 
-    // Route::get('/reviews', [ReviewController::class, 'index'])->name('admin.reviews');
-
+    Route::get('/reviews', [ReviewController::class, 'index'])->name('admin.reviews');
+    Route::put('/reviews', [ReviewController::class, 'update'])->name('reviews.update');
 });

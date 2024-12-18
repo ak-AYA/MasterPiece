@@ -102,7 +102,7 @@
                 </a>
 
                 <!-- Reviews Link -->
-                <a class="nav-link" href="{{ route('admin.services') }}">
+                <a class="nav-link" href="{{ route('admin.reviews') }}">
                     <div class="sb-nav-link-icon"><i class="fas fa-comments"></i></div>
                     Reviews
                 </a>
