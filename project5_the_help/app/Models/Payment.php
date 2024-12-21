@@ -10,4 +10,10 @@ class Payment extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'description', 'is_active', 'logo_url'];
+
+    
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
 }

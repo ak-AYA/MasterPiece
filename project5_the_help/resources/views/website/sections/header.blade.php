@@ -3,7 +3,8 @@
     <nav id="primary-header" class="navbar navbar-expand-lg py-3 fixed-header">
         <div class="container">
             <a class="navbar-brand" href="{{ route('website.index') }}">
-                <img src="{{asset  ('assetts') }}/images/Black White Minimalist Cleaning Company Logo.png" class="logo img-fluid" style="height: 60px; width: auto; object-fit: contain;">
+                <img src="{{asset  ('assetts') }}/images/Black White Minimalist Cleaning Company Logo.png"
+                    class="logo img-fluid" style="height: 60px; width: auto; object-fit: contain;">
             </a>
             <button class="navbar-toggler border-0 d-flex d-lg-none order-3 p-2 shadow-none" type="button"
                 data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false">
@@ -19,14 +20,56 @@
                 <div class="offcanvas-body align-items-center justify-content-end">
                     <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item px-3">
-                            <a class="nav-link active p-0" aria-current="page"
-                            class="navbar-brand"  href="{{ route('website.index') }}">Home</a>
+                            <a class="nav-link active p-0" aria-current="page" class="navbar-brand"
+                                href="{{ route('website.index') }}">Home</a>
                         </li>
                         <li class="nav-item px-3">
-                            <a class="nav-link p-0" aria-current="page"
-                            class="navbar-brand"  href="{{ route('website.services.index') }}">Services</a>
+                            <a class="nav-link p-0" aria-current="page" class="navbar-brand"
+                                href="{{ route('website.services.index') }}">Services</a>
                         </li>
-                        
+
+                        <li class="nav-item px-3">
+                            <ul class="navbar-nav ms-auto">
+                                @if(Auth::guard('provider')->check())
+                                <!-- For Provider -->
+                                <li class="nav-item dropdown">
+                                    <a class=" dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        {{ Auth::guard('provider')->user()->name }}
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item"
+                                                href="{{ route('provider.provider.profile') }}">Profile</a></li>
+                                        <li>
+                                            <form method="POST" action="{{ route('website.logout.provider') }}">
+                                                @csrf
+                                                <button type="submit" class="dropdown-item">Logout</button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </li>
+                                @elseif(Auth::guard('web')->check())
+                                <!-- For User -->
+                                <li class="nav-item dropdown">
+                                    <a class=" dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        {{ Auth::guard('web')->user()->name }}
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" href="{{ route('user.user.profile') }}">Profile</a></li>
+                                        <li>
+                                            <form method="POST" action="{{ route('website.logout.user') }}">
+                                                @csrf
+                                                <button type="submit" class="dropdown-item">Logout</button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </li>
+                                @endif
+                            </ul>
+
+                        </li>
+
 
 
 

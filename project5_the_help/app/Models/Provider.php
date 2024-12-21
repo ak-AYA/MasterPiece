@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Models;
-
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Provider extends Model
+class Provider extends Authenticatable
 {
     use HasFactory;
 
@@ -21,7 +21,7 @@ class Provider extends Model
     }
     public function services()
 {
-    return $this->hasMany(Service::class);
+    return $this->hasMany(Service::class, 'provider_id');
 }
 
 public function reviews()

@@ -32,8 +32,9 @@ class Service extends Model
      */
     public function category()
     {
-        return $this->belongsTo(category::class, 'category_id');
+        return $this->belongsTo(Category::class, 'category_id');
     }
+    
 
     /**
      * Get the category image for the service (not stored in service table).
@@ -42,4 +43,11 @@ class Service extends Model
     {
         return $this->category ? $this->category->image : null; // Fetch the image from category
     }
+
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
+
+
 }

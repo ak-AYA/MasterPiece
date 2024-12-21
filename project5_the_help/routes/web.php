@@ -13,33 +13,72 @@ use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\ProviderController;
+use App\Http\Controllers\Auth\UserLoginController;
 use App\Http\Controllers\ServiceDetailsController;
 use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\Categoriescontroller;
+use App\Http\Controllers\User\UserProfileController;
+use App\Http\Controllers\Auth\UserRegisterController;
+use App\Http\Controllers\Auth\ProviderLoginController;
+use App\Http\Controllers\Auth\ProviderRegisterController;
+use App\Http\Controllers\Provider\ProviderProfileController;
 
 
 
-// -------------
+
+
+// ------------- Website Routes
 
 Route::controller(WebsiteController::class)->name('website.')->group(function () {
-    Route::get('/', [WebsiteController::class, 'index'])->name('index');
+    Route::get('/', 'index')->name('index');
     
     Route::controller(ServicesController::class)->name('services.')->group(function () {
         Route::get('/services', 'index')->name('index');
         Route::get('/services/category/{id}', 'showServicesByCategory')->name('category');
-        
         Route::get('/services/{id}', [ServiceDetailsController::class, 'show'])->name('details');
     });
+
+    // Register Routes
+    Route::get('/register/user', [UserRegisterController::class, 'showRegistrationForm'])->name('register.user');
+    Route::post('/register/user', [UserRegisterController::class, 'register'])->name('register.user.submit');
+    Route::get('/login/user', [UserLoginController::class, 'showLoginForm'])->name('login.user');
+    Route::post('/login/user', [UserLoginController::class, 'login'])->name('login.user.submit');
+    Route::post('/logout/user', [UserLoginController::class, 'logout'])->name('logout.user');
+
+
+    Route::get('/register/provider', [ProviderRegisterController::class, 'showRegistrationForm'])->name('register.provider');
+    Route::post('/register/provider', [ProviderRegisterController::class, 'register'])->name('register.provider.submit');
+    Route::get('/login/provider', [ProviderLoginController::class, 'showLoginForm'])->name('login.provider');
+    Route::post('/login/provider', [ProviderLoginController::class, 'login'])->name('login.provider.submit');
+    Route::post('/logout/provider', [ProviderLoginController::class, 'logout'])->name('logout.provider');
 });
 
 
 
 
 
+Route::middleware(['auth:web'])->prefix('user')->name('user.')->group(function () {
+    // user only routes
+
+
+    Route::get('/profile', [UserProfileController::class, 'index'])->name('user.profile');
+    Route::put('/update-profile', [UserProfileController::class, 'update'])->name('user.updateProfile');
+});
+    
 
 
 
+Route::middleware(['auth:provider'])->prefix('provider')->name('provider.')->group(function () {
+    //provider only routes 
+
+    Route::get('/profile', [ProviderProfileController::class, 'index'])->name('provider.profile');
+    Route::put('/update-profile', [ProviderProfileController::class, 'update'])->name('provider.updateProfile');
+    Route::post('/add-service', [ProviderProfileController::class, 'addService'])->name('provider.addService');
+    Route::get('/edit-service/{serviceId}', [ProviderProfileController::class, 'editService'])->name('provider.editService');
+    Route::put('/update-service/{serviceId}', [ProviderProfileController::class, 'updateService'])->name('provider.updateService');
+
+});
 
 
 

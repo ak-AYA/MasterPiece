@@ -28,4 +28,8 @@ class Discount extends Model
     ];
 
     // If you need to add any custom logic, you can create methods here.
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
 }
