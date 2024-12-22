@@ -46,7 +46,7 @@ class ProviderProfileController extends Controller
             'name' => 'required|string|max:20',
             'description' => 'required|string|max:500',
             'category_id' => 'required|exists:categories,id',
-            'duration' => 'required|numeric|min:0|max:12', 
+            'duration' => 'required|numeric|min:0|max:12',
             'price' => 'required|numeric|min:1|max:200',
             'provider_id' => 'required|exists:users,id',
         ]);

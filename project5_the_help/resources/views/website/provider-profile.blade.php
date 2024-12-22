@@ -1,3 +1,4 @@
+اعطيني كل الكود كامل مع التعديلات على كل الفورمز يعمللهم فاليديشن جافا سكريبت
 @extends('website.main')
 @section('title', 'Provider Profile')
 @section('content')
@@ -50,7 +51,7 @@
                                 <th>Service Name</th>
                                 <th>Description</th>
                                 <th>Category</th>
-                                <th>Duration (hours)</th>
+                                <th>Duration (mins)</th>
                                 <th>Price</th>
                                 <th>Action</th>
                             </tr>
@@ -67,7 +68,7 @@
                                 </td>
 
                                 <td>{{ $service->category->name }}</td>
-                                <td>{{ $service->duration }} h</td>
+                                <td>{{ $service->duration }} min</td>
                                 <td>Jd {{ number_format($service->price, 2) }}</td>
                                 <td>
                                     <button class="btn btn-warning btn-sm" data-bs-toggle="modal"
@@ -102,7 +103,7 @@
                 <hr>
                 <p> Description: </br>{{ $service->description }}</p>
                 <hr>
-                <p> Duration: </br>{{ $service->duration }} h</p>
+                <p> Duration: </br>{{ $service->duration }} min</p>
                 <hr>
                 <p> Price: </br>Jd {{ number_format($service->price, 2) }}</p>
             </div>
@@ -295,7 +296,7 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="duration" class="form-label">Duration (hours)</label>
+                        <label for="duration" class="form-label">Duration (minutes)</label>
                         <input type="number" class="form-control" id="duration" name="duration"
                             value="{{ $service->duration }}" required>
                     </div>
@@ -321,8 +322,7 @@
 <script>
 Swal.fire({
     title: 'Success!',
-    text: '{{ session('
-    success ') }}',
+    text: '{{ session('success') }}',
     icon: 'success',
     confirmButtonText: 'Ok'
 });
@@ -334,4 +334,5 @@ document.getElementById('editProfileBtn').addEventListener('click', function() {
     form.classList.toggle('d-none');
 });
 </script>
+
 @endsection

@@ -15,14 +15,18 @@
                         <h5 class="widget-title text-uppercase border-bottom pb-3 mb-3">Services We Offer</h5>
                         <ul class="list-unstyled">
                             <!-- Link to All Services -->
-                            <li class="{{ !isset($selectedCategory) ? 'active' : '' }}">
+                            @foreach($categories as $category)
+                            <li class="{{ !isset($selectedCategoryId) ? 'active' : '' }}">
                                 <a href="{{ route('website.services.index') }}"
                                     class="item-anchor text-capitalize d-flex align-items-center">
                                     <svg width="18" height="18">
                                         <use xlink:href="#alt-arrow-right-bold"></use>
-                                    </svg>All Services
+                                    </svg>
+                                    All Services
                                 </a>
                             </li>
+
+                            @endforeach
                             <!-- Specific Categories -->
                             @foreach($categories as $category)
                             <li
@@ -63,43 +67,44 @@
                 <div class="row">
                     @forelse($services as $service)
                     <div class="col-md-4 mb-4">
-                    <a href="{{ route('website.services.details', ['id' => $service->id]) }}" class="text-decoration-none">
+                        <a href="{{ route('website.services.details', ['id' => $service->id]) }}"
+                            class="text-decoration-none">
 
-                        <div class="card h-100 shadow-sm">
-                            @if($service->image)
-                            <img src="{{ asset('storage/' . $service->image) }}" class="card-img-top rounded-top"
-                                alt="{{ $service->name }}" style="height: 150px; object-fit: cover;">
-                            @else
-                            <img src="path/to/default-image.jpg" class="card-img-top rounded-top"
-                                alt="No image available" style="height: 150px; object-fit: cover;">
-                            @endif
-                            <div class="card-body">
-                                <h6 class="card-title font-weight-bold">{{ $service->name }}</h6>
-                                <p class="card-text text-muted">
-                                    {{ $service->category->name ?? 'N/A' }} <br>
+                            <div class="card h-100 shadow-sm">
+                                @if($service->image)
+                                <img src="{{ asset('storage/' . $service->image) }}" class="card-img-top rounded-top"
+                                    alt="{{ $service->name }}" style="height: 150px; object-fit: cover;">
+                                @else
+                                <img src="path/to/default-image.jpg" class="card-img-top rounded-top"
+                                    alt="No image available" style="height: 150px; object-fit: cover;">
+                                @endif
+                                <div class="card-body">
+                                    <h6 class="card-title font-weight-bold">{{ $service->name }}</h6>
+                                    <p class="card-text text-muted">
+                                        {{ $service->category->name ?? 'N/A' }} <br>
 
-                                </p>
+                                    </p>
 
-                                <!--avg reviews-->
-                                @php
-                                $providerRating = $service->provider->reviews()->avg('stars') ?? 0;
-                                @endphp
+                                    <!--avg reviews-->
+                                    @php
+                                    $providerRating = $service->provider->reviews()->avg('stars') ?? 0;
+                                    @endphp
 
-                                <div class="d-flex justify-content-between align-items-center">
-                                  <span>
-                                        @for($i = 1; $i <= 5; $i++) @if($i <=floor($providerRating)) <i
-                                            class="fas fa-star" style="color: gold;"></i>
-                                            @elseif($i <= ceil($providerRating)) <i class="fas fa-star-half-alt"
-                                                style="color: gold;"></i>
-                                                @else
-                                                <i class="far fa-star" style="color: gold;"></i>
-                                                @endif
-                                                @endfor
-                                    </span>
-                                    Jd {{ number_format($service->price, 2) }}
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span>
+                                            @for($i = 1; $i <= 5; $i++) @if($i <=floor($providerRating)) <i
+                                                class="fas fa-star" style="color: gold;"></i>
+                                                @elseif($i <= ceil($providerRating)) <i class="fas fa-star-half-alt"
+                                                    style="color: gold;"></i>
+                                                    @else
+                                                    <i class="far fa-star" style="color: gold;"></i>
+                                                    @endif
+                                                    @endfor
+                                        </span>
+                                        Jd {{ number_format($service->price, 2) }}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         </a>
                     </div>
                     @empty
