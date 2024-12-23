@@ -10,7 +10,7 @@ class ProviderController extends Controller
     // Display list of providers
     public function index()
     {
-        $providers = Provider::where('role_id', 3)->paginate(10); // '3' corresponds to 'Provider'
+        $providers = Provider::where('role_id', 3)->get(); // '3' corresponds to 'Provider'
         return view('admin.providers.index', compact('providers'));
     }
 

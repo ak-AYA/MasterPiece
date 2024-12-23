@@ -21,7 +21,7 @@ class AdminMiddleware
             if (Auth::user()->role_id == 1) {
                 return $next($request);  
             } else {
-                return redirect('/home')->with('status', 'Not Authorized');  
+                return redirect('/')->with('status', 'Not Authorized');  
             }
         } else {
             return redirect('/login')->with('status', 'Please log in first'); 

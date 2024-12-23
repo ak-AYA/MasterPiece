@@ -11,7 +11,7 @@ class UserController extends Controller
     // Display list of users
     public function index()
     {
-        $users = User::where('role_id', 2)->paginate(10); // '2' corresponds to 'User'
+        $users = User::where('role_id', 2)->get(); // '2' corresponds to 'User'
         return view('admin.users.index', compact('users'));
     }
 

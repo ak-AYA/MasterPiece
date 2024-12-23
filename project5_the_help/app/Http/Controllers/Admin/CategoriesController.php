@@ -13,7 +13,7 @@ class CategoriesController extends Controller
     // Display list of categories
     public function index()
     {
-        $categories = Category::paginate(10);  // Paginate categories
+        $categories = Category::get();  // Paginate categories
         return view('admin.categories.index', compact('categories'));
     }
 

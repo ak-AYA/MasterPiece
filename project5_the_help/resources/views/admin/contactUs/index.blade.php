@@ -184,7 +184,7 @@
 $(document).ready(function() {
     // Initialize DataTable
     $('#contactTable').DataTable({
-        "ordering": false,
+        "ordering": true,
         "paging": true,
         "searching": true,
         "info": true,

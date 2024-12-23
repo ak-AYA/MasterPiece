@@ -19,10 +19,12 @@ class Provider extends Authenticatable
     {
         return $this->belongsTo(Role::class, 'role_id');
     }
+    
     public function services()
-{
-    return $this->hasMany(Service::class, 'provider_id');
-}
+    {
+        return $this->hasMany(Service::class, 'provider_id');
+    }
+    
 
 public function reviews()
 {

@@ -13,7 +13,7 @@ class ReviewController extends Controller
     public function index()
     {
         
-        $reviews = Review::with(['user', 'provider'])->paginate(10);
+        $reviews = Review::with(['user', 'provider'])->get();
         $users = User::all(); 
         $providers = Provider::all(); 
         

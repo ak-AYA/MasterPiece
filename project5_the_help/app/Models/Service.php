@@ -17,6 +17,7 @@ class Service extends Model
         'provider_id',
         'status',
         'category_id', // Category for the service
+        'image',
     ];
 
     /**
@@ -39,10 +40,6 @@ class Service extends Model
     /**
      * Get the category image for the service (not stored in service table).
      */
-    public function getCategoryImage()
-    {
-        return $this->category ? $this->category->image : null; // Fetch the image from category
-    }
 
     public function bookings()
     {

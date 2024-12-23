@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\BookingController;
 use App\Http\Controllers\Admin\PaymentController;
@@ -74,7 +75,7 @@ Route::middleware(['auth:provider'])->prefix('provider')->name('provider.')->gro
 
     Route::get('/profile', [ProviderProfileController::class, 'index'])->name('provider.profile');
     Route::put('/update-profile', [ProviderProfileController::class, 'update'])->name('provider.updateProfile');
-    Route::post('/add-service', [ProviderProfileController::class, 'addService'])->name('provider.addService');
+    Route::post('/add-service', [ProviderProfileController::class, 'store'])->name('provider.addService');
     Route::get('/edit-service/{serviceId}', [ProviderProfileController::class, 'editService'])->name('provider.editService');
     Route::put('/update-service/{serviceId}', [ProviderProfileController::class, 'updateService'])->name('provider.updateService');
 
@@ -97,9 +98,11 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-    
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
 
 
     Route::get('/users', [UserController::class, 'index'])->name('admin.users');
