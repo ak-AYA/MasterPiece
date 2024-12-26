@@ -2,19 +2,20 @@
     /* Make the navbar background the same navy blue as the sidebar */
     .navbar-dark.bg-dark {
         background-color: #001f3d !important;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
         /* Navy Blue */
     }
 
     /* Change the navbar text color */
     .navbar-brand,
     .nav-link {
-        color: #ffffff !important;
+        color: #f6f9fd !important;
         /* White text */
     }
 
     /* Add a subtle hover effect for navbar links */
     .navbar-nav .nav-link:hover {
-        color: #ffd700 !important;
+        color:rgb(70, 70, 70) !important;
         /* Gold color on hover */
     }
 
@@ -31,7 +32,7 @@
     }
 
     .dropdown-menu .dropdown-item:hover {
-        background-color: #005f88;
+        background-color:rgba(100, 101, 102, 0.36);
         color: white;
     }
 
@@ -44,7 +45,7 @@
 
     .navbar-nav .nav-link:hover,
     .dropdown-item:hover {
-        color: #ffd700 !important;
+        color: #f6f9fd !important;
         /* Gold color on hover */
     }
 

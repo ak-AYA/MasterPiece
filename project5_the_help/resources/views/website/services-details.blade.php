@@ -64,7 +64,7 @@
                         </div>
                         <div class="hero-image">
                             @if($service->image)
-                            <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->name }}"
+                            <img src="{{ asset('assetts/images/services/' . $service->image) }}" alt="{{ $service->name }}"
                                 class="img-fluid mb-5 rounded-4">
                             @else
                             <img src="images/single-service-img.jpg" alt="single-service"

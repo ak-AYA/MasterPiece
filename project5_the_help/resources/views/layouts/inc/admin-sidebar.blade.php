@@ -1,54 +1,56 @@
 <style>
-/* Sidebar background with a gradient of blues */
-.sb-sidenav-dark {
-    background: linear-gradient(180deg, #001f3d, #005f88, #0077b6);
-}
+        /* Sidebar background with a gradient of blues */
+        .sb-sidenav-dark {
+            background:#F8F9FA;
+            
+        }
 
-/* Link text color for better readability */
-.sb-sidenav-menu .nav-link {
-    color: #ffffff !important;
-    transition: background-color 0.3s, color 0.3s;
-}
+        /* Link text color for better readability */
+        .sb-sidenav-menu .nav-link {
+            color:#03101e !important;
+            transition: background-color 0.3s, color 0.3s;
+            margin-left: 15px;
+        }
 
-/* Icons color */
-.sb-nav-link-icon i {
-    color: #ffffff;
-}
+        /* Icons color */
+        .sb-nav-link-icon i {
+            color: #001f3d !important;
+        }
 
-/* Hover effect for links */
-.sb-sidenav-menu .nav-link:hover {
-    background-color: rgba(0, 95, 136, 0.8);
-    color: #ffffff;
-    border-radius: 5px;
-}
+        /* Hover effect for links */
+        .sb-sidenav-menu .nav-link:hover {
+            background-color: rgba(23, 39, 45, 0.8);
+            color: #001f3d;
+            border-radius: 5px;
+        }
 
-/* Active link styling */
-.sb-sidenav-menu .nav-link.active {
-    background-color: #005f88;
-    border-left: 4px solid #0077b6;
-    color: #ffffff;
-}
+        /* Active link styling */
+        .sb-sidenav-menu .nav-link.active {
+            background-color: #001f3d;
+            border-left: 4px solid #001f3d;
+            color: #ffffff;
+        }
 
-/* Footer section background and text color */
-.sb-sidenav-footer {
-    background: #003f66;
-    color: #ffffff;
-}
+        /* Footer section background and text color */
+        .sb-sidenav-footer {
+            background: #003f66;
+            color: #ffffff;
+        }
 
-/* Footer text styling */
-.sb-sidenav-footer .small {
-    color: #cce7ff;
-}
+        /* Footer text styling */
+        .sb-sidenav-footer .small {
+            color: #cce7ff;
+        }
 
-.sb-nav-link-icon i:hover {
-    transform: scale(1.2);
-    transition: transform 0.3s ease-in-out;
-}
+        .sb-nav-link-icon i:hover {
+            transform: scale(1.2);
+            transition: transform 0.3s ease-in-out;
+        }
 
-.sb-sidenav-menu .nav-link.active {
-    background: linear-gradient(90deg, #003d66, #006699);
-    border-left: 5px solid #00ace6;
-}
+        .sb-sidenav-menu .nav-link.active {
+            background: linear-gradient(90deg, #003d66, #006699);
+            border-left: 5px solid #00ace6;
+        }
 </style>
 
 

@@ -12,6 +12,7 @@ class ServicesController extends Controller
     {
 
     $categories = Category::all(); 
+
     $selectedCategoryId = Request::query('category_id');
 
 

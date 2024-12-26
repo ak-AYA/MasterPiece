@@ -71,16 +71,24 @@ Route::middleware(['auth:web'])->prefix('user')->name('user.')->group(function (
 
 
 Route::middleware(['auth:provider'])->prefix('provider')->name('provider.')->group(function () {
-    //provider only routes 
+    // Provider only routes 
 
-    Route::get('/profile', [ProviderProfileController::class, 'index'])->name('provider.profile');
-    Route::put('/update-profile', [ProviderProfileController::class, 'update'])->name('provider.updateProfile');
+    Route::get('/profile', [ProviderProfileController::class, 'index'])->name('provider.profile'); 
+    Route::put('/update-profile', [ProviderProfileController::class, 'update'])->name('provider.updateProfile'); 
+    
+    // Add and edit services
+    Route::get('/services', [ProviderProfileController::class, 'services'])->name('provider.services');  
     Route::post('/add-service', [ProviderProfileController::class, 'store'])->name('provider.addService');
-    Route::get('/edit-service/{serviceId}', [ProviderProfileController::class, 'editService'])->name('provider.editService');
-    Route::put('/update-service/{serviceId}', [ProviderProfileController::class, 'updateService'])->name('provider.updateService');
+    Route::get('/edit-service/{serviceId}', [ProviderProfileController::class, 'editService'])->name('provider.editService'); 
+    Route::put('/update-service/{serviceId}', [ProviderProfileController::class, 'updateService'])->name('provider.updateService'); 
+
+    // Reviews and bookings
+    Route::get('/reviews', [ProviderProfileController::class, 'reviews'])->name('provider.reviews');  
+    Route::get('/bookings', [ProviderProfileController::class, 'bookings'])->name('provider.bookings');  
+    Route::patch('/provider/bookings/{id}/status', [ProviderProfileController::class, 'updateBookingStatus'])
+    ->name('provider.updateBookingStatus');
 
 });
-
 
 
 

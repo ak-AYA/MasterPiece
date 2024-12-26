@@ -3,7 +3,7 @@
 @section('content')
 
 
-<section id="slider">
+<section id="slider" class="mt-4 pt-3">
     <div class="swiper slider position-relative">
         <div class="swiper-wrapper">
             <div class="swiper-slide d-flex"
@@ -72,14 +72,16 @@
 
             @foreach($categories as $category)
             <div class="col-md-4">
-                <div class="feature mb-4 text-center px-3 py-4 border rounded-3">
-                    <img src="{{ asset('storage/' . $category->image) }}" class="card-img-top"
-                        alt="{{ $category->name }}" style="width: 100%; height: 50px; object-fit: contain;">
-                    <hr>
-                    <h6 class="mb-0">{{ $category->name }}</h6>
-                    <hr>
-                    <!-- <p>{{ $category->description }}</p> -->
-                </div>
+                <a href="{{ route('website.services.category', ['id' => $category->id]) }}">
+                    <div class="feature mb-4 text-center px-3 py-4 border rounded-3">
+                        <img src="{{ asset('storage/' . $category->image) }}" class="card-img-top"
+                            alt="{{ $category->name }}" style="width: 100%; height: 50px; object-fit: contain;">
+                        <hr>
+                        <h6 class="mb-0">{{ $category->name }}</h6>
+                        <hr>
+                        <!-- <p>{{ $category->description }}</p> -->
+                    </div>
+                </a>
             </div>
             @endforeach
         </div>

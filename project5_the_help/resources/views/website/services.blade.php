@@ -3,7 +3,13 @@
 @section('content')
 
 
-
+<style>
+.sidebar-categories li.active a {
+    font-weight: bold;
+    color: #EE8E1E !important;
+    text-decoration: none;
+}
+</style>
 <section id="our-services" class="text-center mt-5 pt-4">
     <div class="container mt-5">
         <div class="row">
@@ -14,9 +20,7 @@
                     <div class="widget sidebar-categories bg-gray border rounded-3 p-3 mb-5">
                         <h5 class="widget-title text-uppercase border-bottom pb-3 mb-3">Services We Offer</h5>
                         <ul class="list-unstyled">
-                            <!-- Link to All Services -->
-                            @foreach($categories as $category)
-                            <li class="{{ !isset($selectedCategoryId) ? 'active' : '' }}">
+                            <li class="{{ request()->routeIs('website.services.index') ? 'active' : '' }}">
                                 <a href="{{ route('website.services.index') }}"
                                     class="item-anchor text-capitalize d-flex align-items-center">
                                     <svg width="18" height="18">
@@ -26,21 +30,22 @@
                                 </a>
                             </li>
 
-                            @endforeach
-                            <!-- Specific Categories -->
                             @foreach($categories as $category)
                             <li
-                                class="{{ isset($selectedCategory) && $selectedCategory->id == $category->id ? 'active' : '' }}">
+                                class="{{ request()->routeIs('website.services.category') && request()->route('id') == $category->id ? 'active' : '' }}">
                                 <a href="{{ route('website.services.category', $category->id) }}"
                                     class="item-anchor text-capitalize d-flex align-items-center">
                                     <svg width="18" height="18">
                                         <use xlink:href="#alt-arrow-right-bold"></use>
-                                    </svg>{{ $category->name }}
+                                    </svg>
+                                    {{ $category->name }}
                                 </a>
                             </li>
                             @endforeach
                         </ul>
+
                     </div>
+
 
 
 
@@ -72,8 +77,9 @@
 
                             <div class="card h-100 shadow-sm">
                                 @if($service->image)
-                                <img src="{{ asset('storage/' . $service->image) }}" class="card-img-top rounded-top"
-                                    alt="{{ $service->name }}" style="height: 150px; object-fit: cover;">
+                                <img src="{{ asset('assetts/images/services/' . $service->image) }}"
+                                    class="card-img-top rounded-top" alt="{{ $service->name }}"
+                                    style="height: 150px; object-fit: cover;">
                                 @else
                                 <img src="path/to/default-image.jpg" class="card-img-top rounded-top"
                                     alt="No image available" style="height: 150px; object-fit: cover;">
@@ -504,6 +510,21 @@
 </section>
 
 
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const sidebarLinks = document.querySelectorAll('.sidebar-categories li a');
+    const currentUrl = window.location.href;
+
+    // التحقق من تطابق الرابط الحالي مع الروابط
+    sidebarLinks.forEach(link => {
+        if (link.href === currentUrl) {
+            link.parentElement.classList.add('active');
+        } else {
+            link.parentElement.classList.remove('active');
+        }
+    });
+});
+</script>
 
 
 @endsection

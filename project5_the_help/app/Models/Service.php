@@ -16,7 +16,7 @@ class Service extends Model
         'price',
         'provider_id',
         'status',
-        'category_id', // Category for the service
+        'category_id',
         'image',
     ];
 

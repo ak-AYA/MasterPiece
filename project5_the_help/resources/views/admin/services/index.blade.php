@@ -113,7 +113,7 @@
                     <td>{{ $service->name }}</td>
                     <td>
                         @if($service->image)
-                        <img src="{{ asset('storage/'.$service->image) }}" alt="{{ $service->name }}"
+                        <img src="{{ asset('assetts/images/services/'.$service->image) }}" alt="{{ $service->name }}"
                             class="img-fluid" />
                         @else
                         <span>No Image</span>
@@ -271,7 +271,7 @@
 
                     <div class="mb-2">
                         <label for="editServiceImage" class="form-label">Service Image</label>
-                        <input type="file" class="form-control" id="editServiceImage" name="image" accept="image/*">
+                        <input type="file" class="form-control" id="image" name="image" accept="image/*">
                     </div>
 
                     <div class="mb-2">
