@@ -10,72 +10,72 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 <style>
-.page-header {
-    background-color: #f8f9fa;
-    padding: 20px;
-    border-radius: 10px;
-}
+    .page-header {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+    }
 
-.table-container {
-    padding: 20px;
-}
+    .table-container {
+        padding: 20px;
+    }
 
-.table {
-    padding: 20px 0;
-}
+    .table {
+        padding: 20px 0;
+    }
 
-.table th,
-.table td {
-    border: 1px solid #DEE2E6;
-    padding: 10px;
-    vertical-align: middle;
-    text-align: center;
-}
+    .table th,
+    .table td {
+        border: 1px solid #DEE2E6;
+        padding: 10px;
+        vertical-align: middle;
+        text-align: center;
+    }
 
-.table-hover tbody tr:hover {
-    background-color: #f1f5f9;
-}
+    .table-hover tbody tr:hover {
+        background-color: #f1f5f9;
+    }
 
-.table thead th {
-    font-weight: bold;
-    color: #24282C;
-    background-color: transparent;
-}
+    .table thead th {
+        font-weight: bold;
+        color: #24282C;
+        background-color: transparent;
+    }
 
-.icon-btn {
-    color: #495057;
-    cursor: pointer;
-    font-size: 16px;
-    margin: 0 5px;
-    transition: color 0.2s ease-in-out;
-}
+    .icon-btn {
+        color: #495057;
+        cursor: pointer;
+        font-size: 16px;
+        margin: 0 5px;
+        transition: color 0.2s ease-in-out;
+    }
 
-.icon-btn:hover {
-    color: #007bff;
-}
+    .icon-btn:hover {
+        color: #007bff;
+    }
 
-.modal-body .form-label {
-    font-size: 14px;
-    margin-bottom: 4px;
-}
+    .modal-body .form-label {
+        font-size: 14px;
+        margin-bottom: 4px;
+    }
 
-.modal-body .form-control {
-    height: 32px;
-    font-size: 14px;
-    padding: 4px 8px;
-}
+    .modal-body .form-control {
+        height: 32px;
+        font-size: 14px;
+        padding: 4px 8px;
+    }
 
-.modal-header,
-.modal-footer {
-    padding: 8px 16px;
-}
+    .modal-header,
+    .modal-footer {
+        padding: 8px 16px;
+    }
 
-.table img {
-    max-width: 80px;
-    height: 60px;
-    border-radius: 5px;
-    object-fit: contain;
-}
+    .table img {
+        max-width: 80px;
+        height: 60px;
+        border-radius: 5px;
+        object-fit: contain;
+    }
 </style>
 
 <div class="container mt-4">
@@ -112,12 +112,13 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $service->name }}</td>
                     <td>
-                        @if($service->image)
-                        <img src="{{ asset('assetts/images/services/'.$service->image) }}" alt="{{ $service->name }}"
-                            class="img-fluid" />
-                        @else
-                        <span>No Image</span>
-                        @endif
+                
+                    <img src="{{ asset('assetts/images/services/' . $service->image) }}"
+                        class="card-img-top rounded-top" alt="{{ $service->name }}"
+                        style="height: 150px; object-fit: cover;">
+
+    
+
                     </td>
 
                     <td>
@@ -384,6 +385,17 @@ $(document).ready(function() {
 
 
 });
+
+    document.querySelectorAll('.showDescription').forEach(button => {
+        button.addEventListener('click', function () {
+            const description = this.dataset.description || 'No description available';
+            const name = this.dataset.name || 'No name available';
+            const time = this.dataset.time || 'No date available';
+            
+        });
+    });
+
+
 </script>
 
 @endsection

@@ -11,22 +11,22 @@ class ServicesController extends Controller
     public function index(Request $request)
     {
 
-    $categories = Category::all(); 
+        $categories = Category::all(); 
 
-    $selectedCategoryId = Request::query('category_id');
+        $selectedCategoryId = Request::query('category_id');
 
 
 
-    if ($selectedCategoryId) {
-        $services = Service::where('category_id', $selectedCategoryId)->get();
-    } else {
-        $services = Service::all();
-    }
+        if ($selectedCategoryId) {
+            $services = Service::where('category_id', $selectedCategoryId)->get();
+        } else {
+            $services = Service::all();
+        }
 
-    foreach ($services as $service) {
-        $service->providerRating = $service->provider->reviews()->avg('stars');
-    }
-    return view('website.services', compact('categories', 'services', 'selectedCategoryId'));
+        foreach ($services as $service) {
+            $service->providerRating = $service->provider->reviews()->avg('stars');
+        }
+        return view('website.services', compact('categories', 'services', 'selectedCategoryId'));
 
 
     }

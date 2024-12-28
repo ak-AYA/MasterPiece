@@ -19,6 +19,7 @@ use App\Http\Controllers\ServiceDetailsController;
 use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\Categoriescontroller;
+use App\Http\Controllers\UserBookingController;
 use App\Http\Controllers\User\UserProfileController;
 use App\Http\Controllers\Auth\UserRegisterController;
 use App\Http\Controllers\Auth\ProviderLoginController;
@@ -65,6 +66,11 @@ Route::middleware(['auth:web'])->prefix('user')->name('user.')->group(function (
 
     Route::get('/profile', [UserProfileController::class, 'index'])->name('user.profile');
     Route::put('/update-profile', [UserProfileController::class, 'update'])->name('user.updateProfile');
+
+    Route::get('/booking/{serviceId}', [UserBookingController::class, 'showBookingPage'])->name('booking.page');
+    Route::post('/booking/checkout', [UserBookingController::class, 'processBooking'])->name('booking.checkout');
+
+
 });
     
 

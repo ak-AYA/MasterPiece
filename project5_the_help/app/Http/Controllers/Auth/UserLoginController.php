@@ -40,6 +40,8 @@ class UserLoginController extends Controller
 
     public function logout()
     {
+        session()->forget('booking');
+
         Auth::guard('web')->logout(); 
         return redirect()->route('website.index')->with('success', 'Logged out successfully!');
     }

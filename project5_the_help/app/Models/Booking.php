@@ -14,6 +14,7 @@ class Booking extends Model
     // Define which fields are mass assignable
     protected $fillable = [
         'date',
+        'time',
         'status',
         'user_id',
         'service_id',

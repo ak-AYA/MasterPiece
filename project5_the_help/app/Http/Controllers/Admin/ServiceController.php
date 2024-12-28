@@ -30,13 +30,15 @@ class ServiceController extends Controller
             'provider_id' => 'exists:providers,id',
             'category_id' => 'exists:categories,id',
             'status' => 'required|in:1,0',
-            'image' => 'nullable|image|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-
-        $imagePath = $request->file('image') 
-            ? $request->file('image')->storeAs('assetts/images/services', time() . '.' . $request->file('image')->getClientOriginalExtension(), 'public')
-            : null;
-
+    
+        $imagePath = null;
+    
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('services', 'public');
+        }
+    
         Service::create([
             'name' => $validated['name'],
             'description' => $validated['description'],
@@ -47,9 +49,10 @@ class ServiceController extends Controller
             'status' => $validated['status'],
             'image' => $imagePath,
         ]);
-
+    
         return redirect()->route('admin.services')->with('success', 'Service added successfully.');
     }
+    
 
     public function update(Request $request)
     {
@@ -61,11 +64,12 @@ class ServiceController extends Controller
             'provider_id' => 'exists:providers,id',
             'category_id' => 'exists:categories,id',
             'status' => 'required|in:1,0',
-            'image' => 'nullable|image|max:2048',
+            'image' => 'nullable|max:2048',
         ]);
-
+    
         $service = Service::findOrFail($request->id);
-
+    
+        // Handle image update
         if ($request->hasFile('image')) {
             if ($service->image) {
                 $oldImagePath = public_path('assetts/images/services/' . $service->image);
@@ -73,13 +77,12 @@ class ServiceController extends Controller
                     unlink($oldImagePath);
                 }
             }
-            
             $imageName = time() . '.' . $request->file('image')->getClientOriginalExtension();
-            $request->file('image')->move(public_path('assetts/images/services'), $imageName);
-            
+            $request->file('image')->move(public_path('assets/images/services'), $imageName);
             $service->image = $imageName;
         }
-
+    
+        // Update service details
         $service->update([
             'name' => $validated['name'],
             'description' => $validated['description'],
@@ -89,7 +92,11 @@ class ServiceController extends Controller
             'category_id' => $validated['category_id'],
             'status' => $validated['status'],
         ]);
-
+    
         return redirect()->route('admin.services')->with('success', 'Service updated successfully.');
     }
+    
+    
+    
+    
 }

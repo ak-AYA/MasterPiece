@@ -3,7 +3,7 @@
 @section('content')
 
 
-<section id="our-services" class="text-center mt-5 pt-4">
+<section id="our-services" class="text-center mt-5">
     <div class="container mt-5">
         <div class="row">
             <!-- Categories Sidebar -->
@@ -54,34 +54,102 @@
                 </div>
             </div>
 
-            <!-- Services Section -->
             <main class="post-grid col-md-9">
                 <div class="row">
                     <article class="post-item">
+                        <!-- Title Section -->
                         <div class="section-title mb-5">
                             <p class="mb-2 fs-4 text-capitalize">Providing the best</p>
-                            <h1>{{ $service->name }}</h1> <!-- عرض اسم الخدمة -->
+                            <h1>{{ $service->name }}</h1> <!-- Service Name -->
                         </div>
-                        <div class="hero-image">
+
+                        <!-- Image Section with Button -->
+                        <div class="hero-image position-relative p-5">
                             @if($service->image)
-                            <img src="{{ asset('assetts/images/services/' . $service->image) }}" alt="{{ $service->name }}"
-                                class="img-fluid mb-5 rounded-4">
+                            <img src="{{ asset('assetts/images/services/' . $service->image) }}"
+                                alt="{{ $service->name }}" class="img-fluid mb-5 rounded-4 w-100">
                             @else
                             <img src="images/single-service-img.jpg" alt="single-service"
-                                class="img-fluid mb-5 rounded-4">
+                                class="img-fluid mb-5 rounded-4 w-100">
                             @endif
+
+                            <!-- Booking Button on the Image -->
+                            <div class="position-absolute top-50 start-50 translate-middle text-center">
+                                @if(Auth::guard('web')->check() && Auth::guard('web')->user()->role_id == 2)
+                                <a href="{{ route('user.booking.page', ['serviceId' => $service->id]) }}"
+                                    class="btn btn-primary btn-lg px-5 py-3 rounded-pill">
+                                    Book Now <i class="fas fa-arrow-right ms-2"></i>
+                                </a>
+                                @else
+                                <a href="{{ route('website.register.user') }}" class="btn btn-primary btn-lg px-5 py-3 rounded-pill">Regester Now</a>
+                                @endif
+
+                            </div>
+
                         </div>
-                        <p>{{ $service->description }}</p> <!-- عرض وصف الخدمة -->
-                        <p><strong>Price:</strong> JD {{ number_format($service->price, 2) }}</p> <!-- عرض السعر -->
-                        <p><strong>Duration:</strong> {{ $service->duration }} hours</p> <!-- عرض مدة الخدمة -->
 
-                        <!-- تفاصيل أخرى إذا كانت موجودة في جدول الخدمة -->
-                        @if($service->additional_info)
-                        <p><strong>Additional Info:</strong> {{ $service->additional_info }}</p>
-                        @endif
+                        <!-- Service Details Section with Flexbox Layout -->
+                        <div class="service-details d-flex p-5">
+                            <!-- Description Section (80%) -->
+                            <div class="description-box" style="flex: 80%; padding-right: 30px; text-align: justify;">
+                                <p>{{ $service->description }}</p> <!-- Description Text -->
+                            </div>
 
-                        <!-- يمكنك إضافة المزيد من الحقول حسب الجدول الخاص بالخدمة -->
+                            <!-- Price and Duration Section (20%) -->
+                            <div class="d-flex flex-column"
+                                style="flex: 20%; border: 2px solid #f0f0f0; border-radius: 10px; padding: 20px;">
+                                <div class="info-card p-4 rounded-3 mb-3">
+                                    <h6 class="text-primary widget-title pb-2 fw-semibold">Price</h6>
+                                    <p class="h5 mb-0">JD {{ number_format($service->price, 2) }}</p>
+                                </div>
+                                <div class="info-card p-4 rounded-3">
+                                    <h6 class="text-primary widget-title pb-2 fw-semibold">Duration</h6>
+                                    <p class="h5 mb-0">{{ $service->duration }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </article>
+
+
+                    <!-- Reviews Section -->
+                    <div class="reviews-section p-4 bg-light rounded-3">
+                        <h5 class="text mb-4"> Reviews</h5>
+
+                        <!-- Review Card -->
+                        <div class="review-card d-flex align-items-center mb-4 p-3 border rounded-3 shadow-sm">
+                            <!-- User Image Section (20%) -->
+                            <div class="user-image " style="flex: 20%;">
+                                <img src="https://via.placeholder.com/80" alt="User Avatar"
+                                    style="width: 100%; height: auto; object-fit: cover;">
+                            </div>
+
+                            <!-- User Info and Review Message Section (80%) -->
+                            <div class="review-info" style="flex: 80%; padding-left: 20px; text-align: left;">
+                                <!-- User Name -->
+                                <h6 class="text-primary mb-1">John Doe</h6>
+
+                                <!-- Rating -->
+                                <div class="rating mb-2">
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star-half-alt text-warning"></i>
+                                </div>
+
+                                <!-- Review Message -->
+                                <p>This service was excellent! Highly recommend it. The team was professional, and the
+                                    result exceeded my expectations.</p>
+
+                                <!-- Review Date -->
+                                <small class="text-muted">Reviewed on: January 20, 2024</small>
+                            </div>
+
+                        </div>
+                    </div>
+
                 </div>
             </main>
 

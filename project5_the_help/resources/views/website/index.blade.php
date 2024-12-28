@@ -3,7 +3,7 @@
 @section('content')
 
 
-<section id="slider" class="mt-4 pt-3">
+<section id="slider" class="mt-5 pt-4">
     <div class="swiper slider position-relative">
         <div class="swiper-wrapper">
             <div class="swiper-slide d-flex"
@@ -37,15 +37,6 @@
                     <a href="services.html" class="btn btn-primary mt-3">Our Services</a>
                 </div>
             </div>
-            <div class="swiper-slide d-flex"
-                style="background-image: url('/assetts/images/slider-image.jpg'); background-size: cover; background-repeat: no-repeat; height: 80vh; background-position: center; height: 80vh;">
-                <div class="banner-content px-5 py-4 text-center m-auto py-5 rounded-4 shadow">
-                    <h2 class="mb-0">Best Cleaning Services</h2>
-                    <p class="fs-4 text-capitalize">Welcome to Super Clean Services, your one-stop solution for
-                        exceptional cleaning services!</p>
-                    <a href="services.html" class="btn btn-primary mt-3">Our Services</a>
-                </div>
-            </div>
         </div>
         <div class="position-absolute top-0 bottom-0 end-0 m-auto me-0 me-md-5 main-slider-button-next">
             <svg class="chevron-forward-circle light-color" width="60" height="60">
@@ -60,7 +51,7 @@
     </div>
 </section>
 
-<section id="features" class="padding-medium">
+<section id="features" class="padding-small">
     <div class="container">
 
         <div class="section-title mb-5 text-center">
@@ -88,32 +79,12 @@
     </div>
 </section>
 
-<section id="call" class="margin-medium">
-    <div class="container">
-        <div class="position-relative rounded-4 overflow-hidden bg-accent-gradient">
-            <div class="row">
-                <div class="col-md-4">
-                </div>
-                <div class="col-md-8">
-                    <div class="call py-5 px-2">
-                        <h2 class="text-light">Give us Call: 123 456 7891</h2>
-                        <p class="fs-4 text-capitalize text-light">Our energetic and helpful team are always ready for
-                            you.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="position-absolute top-0 ms-5 d-none d-lg-block">
-                <svg class="light-blue-color" width="300" height="300">
-                    <use xlink:href="#call-chat-rounded-outline"></use>
-                </svg>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-<section id="our-services" class="padding-medium"
+<section id="our-services" class="mb-5"
     style="background-image: url('/assetts/images/services-bg.png'); background-repeat: no-repeat; background-position: center;">
+    <div class="section-title mb-5 text-center">
+        <p class="mb-2 fs-4 text-capitalize">How it works ?</p>
+        <h3>How it works</h3>
+    </div>
     <div class="swiper services-swiper py-3">
         <div class="swiper-wrapper ms-0 ps-0 ms-sm-5 ps-sm-5">
             <div class="swiper-slide mt-5 service text-center">
@@ -141,8 +112,83 @@
                 <h6 class="mb-0"><a href="service-single.html">Carpet Cleaning</a></h6>
                 <p>Boost productivity and employee with well-maintained office.</p>
             </div>
+            <div class="swiper-slide mt-3 service text-center">
+                <img class="rounded-circle mb-4 img-fluid" src="{{asset  ('assetts') }}/images/service2.jpg" alt="img">
+                <h6 class="mb-0"><a href="service-single.html">Window Cleaning</a></h6>
+                <p>Enjoy crystal-clear views with free window cleaning services.</p>
+            </div>
+            <div class="swiper-slide mt-3 service text-center">
+                <img class="rounded-circle mb-4 img-fluid" src="{{asset  ('assetts') }}/images/service4.jpg" alt="img">
+                <h6 class="mb-0"><a href="service-single.html">Roof Cleaning</a></h6>
+                <p>Create a hygienic workplace commercial cleaning services.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="about-us-2">
+    <div class="container">
+      <div class="row align-items-center">
+
+        <div class="col-md-6 mt-4">
+          <div class="section-title mb-4">
+            <p class="mb-2 fs-4 text-capitalize">Our Achievements</p>
+            <h3>Why To Choose Us</h3>
+          </div>
+          <p>At SuperClean, we prioritize customer satisfaction and tailor our services to meet your specific needs. Using cutting-edge equipment and eco-friendly products, we leave no detail untouched, providing thorough and meticulous cleaning for every corner of your space.</p>
+          <a class="btn btn-primary mt-4" href="services.html">Get to knoow us</a>
+        </div>
+
+        <div class="col-md-6 mt-4">
+
+          <div class="row">
+        
+            <div class="col-md-6">
+              <div class="counter-info text-center">
+                <div class="counter-number text-primary display-2 fw-semibold d-flex align-items-center justify-content-center">
+                  <span class="counter-prefix">+</span>
+                  <h5 class="timer display-4 fw-bold m-0">5120</h5>
+                </div>
+                <p class="counter-description">Happy Clients</p>
+              </div>
+            </div>
+    
+            <div class="col-md-6">
+              <div class="counter-info text-center">
+                <div class="counter-number text-primary display-2 fw-semibold d-flex align-items-center justify-content-center">
+                  <span class="counter-prefix">+</span>
+                  <h5 class="timer display-4 fw-bold m-0" data-to="5120" data-speed="8000">26</h5>
+                </div>
+                <p class="counter-description">Total Branches</p>
+              </div>
+            </div>
+    
+            <div class="col-md-6">
+              <div class="counter-info text-center">
+                <div class="counter-number text-primary display-2 fw-semibold d-flex align-items-center justify-content-center">
+                  <span class="counter-prefix">+</span>
+                  <h5 class="timer display-4 fw-bold m-0" data-to="5120" data-speed="8000">54</h5>
+                </div>
+                <p class="counter-description">Pro Cleaners</p>
+              </div>
+            </div>
+    
+            <div class="col-md-6">
+              <div class="counter-info text-center">
+                <div class="counter-number text-primary display-2 fw-semibold d-flex align-items-center justify-content-center">
+                  <span class="counter-prefix">+</span>
+                  <h5 class="timer display-4 fw-bold m-0" data-to="5120" data-speed="8000">10</h5>
+                </div>
+                <p class="counter-description">Years Experience</p>
+              </div>
+            </div>
+    
+          </div>  
 
         </div>
+        
+        
+      </div>
     </div>
 </section>
 
@@ -255,42 +301,6 @@
                                         alt="reviewer">
                                     <div class="author-text">
                                         <h6 class="name mb-0">Kelly Garcia</h6>
-                                        <span class="time text-capitalize">2 months ago</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="review-item">
-                                <div class="review bg-gray border rounded-3 p-4">
-                                    <div class="review-star d-flex mb-2">
-                                        <svg class="star me-1 text-warning" width="16" height="16">
-                                            <use xlink:href="#star" />
-                                        </svg>
-                                        <svg class="star me-1 text-warning" width="16" height="16">
-                                            <use xlink:href="#star" />
-                                        </svg>
-                                        <svg class="star me-1 text-warning" width="16" height="16">
-                                            <use xlink:href="#star" />
-                                        </svg>
-                                        <svg class="star me-1 text-warning" width="16" height="16">
-                                            <use xlink:href="#star" />
-                                        </svg>
-                                        <svg class="star me-1 text-warning" width="16" height="16">
-                                            <use xlink:href="#star" />
-                                        </svg>
-                                    </div>
-                                    <blockquote class="mb-0">
-                                        <p class="mb-0">“A pellen tesque pretium feugiat vel mobi sagittis lorem habi
-                                            tasse cursus ipsum quis nec eget facilisis. Quis nibh ut bindum nisl quis
-                                            placerat proin tortor mattis.”</p>
-                                    </blockquote>
-                                </div>
-                                <div class="author-detail mt-4 d-flex align-items-center">
-                                    <img class="img-fluid me-3" src="{{asset  ('assetts') }}/images/reviewer1.jpg"
-                                        alt="reviewer">
-                                    <div class="author-text">
-                                        <h6 class="name mb-0">James Rodrigo</h6>
                                         <span class="time text-capitalize">2 months ago</span>
                                     </div>
                                 </div>
@@ -413,142 +423,6 @@
     </div>
 </section>
 
-<section id="quote" class="bg-gray padding-small margin-medium">
-    <div class="container text-center">
-        <div class="section-title">
-            <h3>Request a free quote</h3>
-        </div>
-        <form class="contact-form row mt-5">
-            <div class="col-lg-6 col-md-12 col-sm-12 mb-4">
-                <input type="text" name="name" placeholder="Full Name" class="w-100 border ps-4 rounded-3">
-            </div>
-            <div class="col-lg-6 col-md-12 col-sm-12 mb-4">
-                <input type="email" name="email" placeholder="Email" class="w-100 border ps-4 rounded-3">
-            </div>
-            <div class="col-lg-6 col-md-12 col-sm-12 mb-4">
-                <input type="text" name="phone" placeholder="Phone" class="w-100 border ps-4 rounded-3">
-            </div>
-            <div class="col-lg-6 col-md-12 col-sm-12 mb-4">
-                <input type="text" name="city" placeholder="City" class="w-100 border ps-4 rounded-3">
-            </div>
-            <div class="col-md-12 col-sm-12 mb-4">
-                <input type="text" name="property" placeholder="Property Address" class="w-100 border ps-4 rounded-3">
-            </div>
-            <div class="col-md-12 col-sm-12 mb-4">
-                <select class="form-select focus-transparent w-100 border rounded-3 ps-4" aria-invalid="false"
-                    name="choose">
-                    <option value="Select Your Service">Interested In</option>
-                    <option value="Service">Deep Cleaning</option>
-                    <option value="Service">Window Cleaning</option>
-                    <option value="Service">Office Cleaning</option>
-                    <option value="Service">Roof Cleaning</option>
-                    <option value="Service">Carpet Cleaning</option>
-                </select>
-            </div>
-            <div class="col-md-12 col-sm-12 mb-4">
-                <textarea class="w-100 border p-3 ps-4 rounded-3" type="text" name="details"
-                    placeholder="Details"></textarea>
-            </div>
-        </form>
-        <a href="#" class="btn btn-medium btn-primary btn-pill mt-3 text-uppercase">Submit</a>
-    </div>
-</section>
-
-
-<section id="faqs" class="bg-gray padding-small margin-medium mb-0">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 offset-md-2 accordion" id="accordion">
-                <div class="accordion-item border-0 rounded-3 mb-3">
-                    <h5 class="text-capitalize fw-regular accordion-header">
-                        <button class="accordion-button bg-transparent focus-transparent text-capitalize shadow-none"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
-                            aria-controls="collapseOne">
-                            What areas do you serve ?
-                        </button>
-                    </h5>
-                    <div id="collapseOne" class="accordion-collapse border-0 collapse show" data-bs-parent="#accordion">
-                        <div class="accordion-body pt-0">
-                            <p>SuperCleanPro Services operates in your place. We proudly serve both residential and
-                                commercial properties within this area, delivering top-quality cleaning solutions to our
-                                valued customers.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion-item border-0 rounded-3 mb-3">
-                    <h5 class="text-capitalize fw-regular accordion-header">
-                        <button
-                            class="accordion-button bg-transparent collapsed focus-transparent text-capitalize shadow-none"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
-                            aria-controls="collapseTwo">
-                            Are your cleaning technicians trained and insured ?
-                        </button>
-                    </h5>
-                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordion">
-                        <div class="accordion-body pt-0">
-                            <p>SuperCleanPro Services operates in your place. We proudly serve both residential and
-                                commercial properties within this area, delivering top-quality cleaning solutions to our
-                                valued customers.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion-item border-0 rounded-3 mb-3">
-                    <h5 class="text-capitalize fw-regular accordion-header">
-                        <button
-                            class="accordion-button bg-transparent collapsed focus-transparent text-capitalize shadow-none"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree"
-                            aria-expanded="false" aria-controls="collapseThree">
-                            What cleaning products do you use ?
-                        </button>
-                    </h5>
-                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordion">
-                        <div class="accordion-body pt-0">
-                            <p>SuperCleanPro Services operates in your place. We proudly serve both residential and
-                                commercial properties within this area, delivering top-quality cleaning solutions to our
-                                valued customers.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion-item border-0 rounded-3 mb-3">
-                    <h5 class="text-capitalize fw-regular accordion-header">
-                        <button
-                            class="accordion-button bg-transparent collapsed focus-transparent text-capitalize shadow-none"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false"
-                            aria-controls="collapseFour">
-                            How do you determine pricing for your services ?
-                        </button>
-                    </h5>
-                    <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordion">
-                        <div class="accordion-body pt-0">
-                            <p>SuperCleanPro Services operates in your place. We proudly serve both residential and
-                                commercial properties within this area, delivering top-quality cleaning solutions to our
-                                valued customers.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion-item border-0 rounded-3 mb-3">
-                    <h5 class="text-capitalize fw-regular accordion-header">
-                        <button
-                            class="accordion-button bg-transparent collapsed focus-transparent text-capitalize shadow-none"
-                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false"
-                            aria-controls="collapseFive">
-                            Do I need to provide cleaning equipment and supplies ?
-                        </button>
-                    </h5>
-                    <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordion">
-                        <div class="accordion-body pt-0">
-                            <p>SuperCleanPro Services operates in your place. We proudly serve both residential and
-                                commercial properties within this area, delivering top-quality cleaning solutions to our
-                                valued customers.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-            </div>
-        </div>
-    </div>
-</section>
 
 <section id="contact-info" class="py-5 bg-accent-gradient">
     <div class="container">
