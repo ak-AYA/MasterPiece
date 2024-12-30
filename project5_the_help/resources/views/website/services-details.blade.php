@@ -3,7 +3,7 @@
 @section('content')
 
 
-<section id="our-services" class="text-center mt-5">
+<section id="our-services" class="text-center mt-5 pt-4">
     <div class="container mt-5">
         <div class="row">
             <!-- Categories Sidebar -->
@@ -54,23 +54,23 @@
                 </div>
             </div>
 
-            <main class="post-grid col-md-9">
+            <main class="post-grid col-md-9 ">
                 <div class="row">
                     <article class="post-item">
                         <!-- Title Section -->
-                        <div class="section-title mb-5">
+                        <div class="section-title mb-3">
                             <p class="mb-2 fs-4 text-capitalize">Providing the best</p>
                             <h1>{{ $service->name }}</h1> <!-- Service Name -->
                         </div>
 
                         <!-- Image Section with Button -->
-                        <div class="hero-image position-relative p-5">
+                        <div class="hero-image position-relative">
                             @if($service->image)
-                            <img src="{{ asset('assetts/images/services/' . $service->image) }}"
-                                alt="{{ $service->name }}" class="img-fluid mb-5 rounded-4 w-100">
+                            <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->name }}"
+                                class="img-fluid mb-5 rounded-4" style="width: 100%; height: 500px; object-fit: cover;">
                             @else
                             <img src="images/single-service-img.jpg" alt="single-service"
-                                class="img-fluid mb-5 rounded-4 w-100">
+                                class="img-fluid mb-5 rounded-4" style="width: 100%; height: 500px; object-fit: cover;">
                             @endif
 
                             <!-- Booking Button on the Image -->
@@ -81,7 +81,8 @@
                                     Book Now <i class="fas fa-arrow-right ms-2"></i>
                                 </a>
                                 @else
-                                <a href="{{ route('website.register.user') }}" class="btn btn-primary btn-lg px-5 py-3 rounded-pill">Regester Now</a>
+                                <a href="{{ route('website.login.user') }}"
+                                    class="btn btn-primary btn-lg px-5 py-3 rounded-pill">Login Now</a>
                                 @endif
 
                             </div>
@@ -89,9 +90,9 @@
                         </div>
 
                         <!-- Service Details Section with Flexbox Layout -->
-                        <div class="service-details d-flex p-5">
+                        <div class="service-details d-flex">
                             <!-- Description Section (80%) -->
-                            <div class="description-box" style="flex: 80%; padding-right: 30px; text-align: justify;">
+                            <div class="description-box" style="flex: 70%; padding-right: 30px; text-align: justify;">
                                 <p>{{ $service->description }}</p> <!-- Description Text -->
                             </div>
 

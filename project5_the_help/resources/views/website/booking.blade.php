@@ -91,11 +91,11 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-12 mb-3">
                                 <input type="text" class="form-control" id="categoryName"
-                                    value="{{ session('booking')['service_category'] ?? '' }}" readonly>
+                                    value="{{ session('booking')['service_name'] ?? '' }}" readonly>
                             </div>
                             <div class="col-lg-6 col-md-6 col-12 mb-3">
                                 <input type="text" class="form-control" id="serviceType"
-                                    value="{{ session('booking')['service_name'] ?? '' }}" readonly>
+                                    value="{{ number_format(session('booking')['price'], 2) }}" readonly>
                             </div>
                         </div>
                     </div>
@@ -126,24 +126,24 @@
                 <h4 class="summary-header pb-4">Booking Summary</h4>
                 <div class="summary-item">
                     <span>Service Type:</span>
-                    <span>{{ session('service')->name }}</span>
+                    <span>{{ session('booking')['service_name'] }}</span>
                 </div>
                 <div class="summary-item">
                     <span>Date:</span>
-                    <span>{{ session('booking_date') }}</span>
+                    <span>{{ session('booking')['date'] ?? ''  }}</span>
                 </div>
                 <div class="summary-item">
                     <span>Time:</span>
-                    <span>{{ session('booking_time') }}</span>
+                    <span>{{ session('booking')['time'] ?? ''  }}</span>
                 </div>
                 <div class="summary-item">
                     <span>Price:</span>
-                    <span>JD {{ number_format(session('service')->price, 2) }}</span>
+                    <span>JD {{ number_format(session('booking')['price'], 2) }}</span>
                 </div>
                 <hr>
                 <div class="summary-item total-price pt-5">
                     <span>Total:</span>
-                    <span>JD {{ number_format(session('service')->price, 2) }}</span>
+                    <span>JD {{ number_format(session('booking')['price'], 2) }}</span>
                 </div>
             </div>
         </div>

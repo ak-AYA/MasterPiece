@@ -30,6 +30,7 @@ use App\Http\Controllers\Provider\ProviderProfileController;
 
 
 
+
 // ------------- Website Routes
 
 Route::controller(WebsiteController::class)->name('website.')->group(function () {
@@ -39,6 +40,7 @@ Route::controller(WebsiteController::class)->name('website.')->group(function ()
         Route::get('/services', 'index')->name('index');
         Route::get('/services/category/{id}', 'showServicesByCategory')->name('category');
         Route::get('/services/{id}', [ServiceDetailsController::class, 'show'])->name('details');
+        Route::get('/search-services', [ServicesController::class, 'search'])->name('services.search');
     });
 
     // Register Routes

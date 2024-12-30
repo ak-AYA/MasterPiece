@@ -4,40 +4,38 @@ namespace App\Http\Controllers;
 
 use App\Models\Service;
 use App\Models\Category;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 
 class ServicesController extends Controller
 {
     public function index(Request $request)
     {
-
         $categories = Category::all(); 
 
-        $selectedCategoryId = Request::query('category_id');
-
-
+        $selectedCategoryId = $request->query('category_id');
 
         if ($selectedCategoryId) {
-            $services = Service::where('category_id', $selectedCategoryId)->get();
+            $services = Service::where('category_id', $selectedCategoryId)->paginate(9);
         } else {
-            $services = Service::all();
+            $services = Service::paginate(9);
         }
 
+        // Calculate provider rating for each service
         foreach ($services as $service) {
             $service->providerRating = $service->provider->reviews()->avg('stars');
         }
+
         return view('website.services', compact('categories', 'services', 'selectedCategoryId'));
-
-
     }
 
-//   Service by id
+    // Show services by category ID
     public function showServicesByCategory($id)
     {
         $categories = Category::all(); 
-        $services = Service::where('category_id', $id)->get();
         $selectedCategory = Category::findOrFail($id); 
+        $services = Service::where('category_id', $id)->paginate(9);
 
+        // Calculate provider rating for each service
         foreach ($services as $service) {
             $service->providerRating = $service->provider->reviews()->avg('stars');
         }
@@ -45,4 +43,24 @@ class ServicesController extends Controller
         return view('website.services', compact('categories', 'services', 'selectedCategory'));
     }
 
+    // Search services by query
+    public function search(Request $request)
+    {
+        // Get search query input
+        $searchQuery = $request->input('query');
+
+        // If no search query, return empty result
+        if (!$searchQuery) {
+            return response()->json([]);
+        }
+
+        // Query services based on name or description
+        $services = Service::where('name', 'LIKE', "%{$searchQuery}%")
+            ->orWhere('description', 'LIKE', "%{$searchQuery}%")
+            ->select('id', 'name', 'description', 'image') // Only select necessary fields
+            ->get();
+
+        // Return the matched services as JSON response
+        return response()->json($services);
+    }
 }

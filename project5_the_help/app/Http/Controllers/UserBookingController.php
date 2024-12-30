@@ -16,7 +16,7 @@ class UserBookingController extends Controller
         // Fetch the service by ID
         $service = Service::find($serviceId);
 
-
+// dd( $service->id);
         session()->put('booking', [
             'user_id' => $user->id,
             'service_id' => $service->id,
@@ -27,7 +27,8 @@ class UserBookingController extends Controller
         ]);
         
         session()->save();
-
+        
+        // dd(session()->get('booking'));
 
         return view('website.booking', compact('user', 'service'));
     }
