@@ -60,22 +60,21 @@
         </div>
 
         <div class="row">
-
-            @foreach($categories as $category)
-            <div class="col-md-4">
-                <a href="{{ route('website.services.category', ['id' => $category->id]) }}">
-                    <div class="feature mb-4 text-center px-3 py-4 border rounded-3">
-                        <img src="{{ asset('storage/' . $category->image) }}" class="card-img-top"
-                            alt="{{ $category->name }}" style="width: 100%; height: 50px; object-fit: contain;">
-                        <hr>
-                        <h6 class="mb-0">{{ $category->name }}</h6>
-                        <hr>
-                        <!-- <p>{{ $category->description }}</p> -->
-                    </div>
-                </a>
+    @foreach($categories as $category)
+    <div class="col-md-4">
+        <a href="{{ route('website.services.category', ['id' => $category->id]) }}">
+            <div class="feature mb-4 text-center px-3 py-4 border rounded-3" 
+                 style="position: relative; transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;">
+                <img src="{{ asset('storage/' . $category->image) }}" class="card-img-top"
+                     alt="{{ $category->name }}" style="width: 100%; height: 50px; object-fit: contain; transition: transform 0.3s ease;">
+                <hr>
+                <h6 class="mb-0">{{ $category->name }}</h6>
+                <hr>
             </div>
-            @endforeach
-        </div>
+        </a>
+    </div>
+    @endforeach
+</div>
     </div>
 </section>
 
@@ -198,114 +197,31 @@
             <div class="review-content">
                 <div class="swiper testimonial-swiper">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <div class="review-item">
-                                <div class="review bg-gray border rounded-3 p-4">
-                                    <div class="review-star d-flex mb-2">
-                                        <svg class="star me-1 text-warning" width="16" height="16">
-                                            <use xlink:href="#star" />
-                                        </svg>
-                                        <svg class="star me-1 text-warning" width="16" height="16">
-                                            <use xlink:href="#star" />
-                                        </svg>
-                                        <svg class="star me-1 text-warning" width="16" height="16">
-                                            <use xlink:href="#star" />
-                                        </svg>
-                                        <svg class="star me-1 text-warning" width="16" height="16">
-                                            <use xlink:href="#star" />
-                                        </svg>
-                                        <svg class="star me-1 text-warning" width="16" height="16">
-                                            <use xlink:href="#star" />
-                                        </svg>
+                        @foreach($topReviews as $review)
+                            <div class="swiper-slide">
+                                <div class="review-item">
+                                    <div class="review bg-gray border rounded-3 p-4">
+                                        <div class="review-star d-flex mb-2">
+                                            @for($i = 0; $i < $review->stars; $i++)
+                                                <svg class="star me-1 text-warning" width="16" height="16">
+                                                    <use xlink:href="#star" />
+                                                </svg>
+                                            @endfor
+                                        </div>
+                                        <blockquote class="mb-0">
+                                            <p class="mb-0">“{{ $review->text }}”</p>
+                                        </blockquote>
                                     </div>
-                                    <blockquote class="mb-0">
-                                        <p class="mb-0">“A pellen tesque pretium feugiat vel mobi sagittis lorem habi
-                                            tasse cursus ipsum quis nec eget facilisis. Quis nibh ut bindum nisl quis
-                                            placerat proin tortor mattis.”</p>
-                                    </blockquote>
-                                </div>
-                                <div class="author-detail mt-4 d-flex align-items-center">
-                                    <img class="img-fluid me-3" src="{{asset  ('assetts') }}/images/reviewer1.jpg"
-                                        alt="reviewer">
-                                    <div class="author-text">
-                                        <h6 class="name mb-0">James Rodrigo</h6>
-                                        <span class="time text-capitalize">2 months ago</span>
+                                    <div class="author-detail mt-4 d-flex align-items-center">
+                                    <!-- <i class="fas fa-user-circle fa-3x me-3"></i> -->
+                                        <div class="author-text">
+                                            <h6 class="name mb-0">{{ $review->user->name }}</h6>
+                                            <span class="time text-capitalize">{{ $review->created_at->diffForHumans() }}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="review-item">
-                                <div class="review bg-gray border rounded-3 p-4">
-                                    <div class="review-star d-flex mb-2">
-                                        <svg class="star me-1 text-warning" width="16" height="16">
-                                            <use xlink:href="#star" />
-                                        </svg>
-                                        <svg class="star me-1 text-warning" width="16" height="16">
-                                            <use xlink:href="#star" />
-                                        </svg>
-                                        <svg class="star me-1 text-warning" width="16" height="16">
-                                            <use xlink:href="#star" />
-                                        </svg>
-                                        <svg class="star me-1 text-warning" width="16" height="16">
-                                            <use xlink:href="#star" />
-                                        </svg>
-                                        <svg class="star me-1 text-warning" width="16" height="16">
-                                            <use xlink:href="#star" />
-                                        </svg>
-                                    </div>
-                                    <blockquote class="mb-0">
-                                        <p class="mb-0">“A pellen tesque pretium feugiat vel mobi sagittis lorem habi
-                                            tasse cursus ipsum quis nec eget facilisis. Quis nibh ut bindum nisl quis
-                                            placerat proin tortor mattis.”</p>
-                                    </blockquote>
-                                </div>
-                                <div class="author-detail mt-4 d-flex align-items-center">
-                                    <img class="img-fluid me-3" src="{{asset  ('assetts') }}/images/reviewer2.jpg"
-                                        alt="reviewer">
-                                    <div class="author-text">
-                                        <h6 class="name mb-0">Sarah anderson</h6>
-                                        <span class="time text-capitalize">2 months ago</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="review-item">
-                                <div class="review bg-gray border rounded-3 p-4">
-                                    <div class="review-star d-flex mb-2">
-                                        <svg class="star me-1 text-warning" width="16" height="16">
-                                            <use xlink:href="#star" />
-                                        </svg>
-                                        <svg class="star me-1 text-warning" width="16" height="16">
-                                            <use xlink:href="#star" />
-                                        </svg>
-                                        <svg class="star me-1 text-warning" width="16" height="16">
-                                            <use xlink:href="#star" />
-                                        </svg>
-                                        <svg class="star me-1 text-warning" width="16" height="16">
-                                            <use xlink:href="#star" />
-                                        </svg>
-                                        <svg class="star me-1 text-warning" width="16" height="16">
-                                            <use xlink:href="#star" />
-                                        </svg>
-                                    </div>
-                                    <blockquote class="mb-0">
-                                        <p class="mb-0">“A pellen tesque pretium feugiat vel mobi sagittis lorem habi
-                                            tasse cursus ipsum quis nec eget facilisis. Quis nibh ut bindum nisl quis
-                                            placerat proin tortor mattis.”</p>
-                                    </blockquote>
-                                </div>
-                                <div class="author-detail mt-4 d-flex align-items-center">
-                                    <img class="img-fluid me-3" src="{{asset  ('assetts') }}/images/reviewer3.jpg"
-                                        alt="reviewer">
-                                    <div class="author-text">
-                                        <h6 class="name mb-0">Kelly Garcia</h6>
-                                        <span class="time text-capitalize">2 months ago</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                     <div class="swiper-pagination position-relative pt-5"></div>
                 </div>
@@ -459,6 +375,20 @@
     </div>
 </section>
 
+<script>
 
+    document.querySelectorAll('.feature').forEach(function(card) {
+        card.addEventListener('mouseenter', function() {
+            card.style.transform = 'translateY(-10px)';
+            card.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+            card.style.backgroundColor = '#f8f9fa';
+        });
+        card.addEventListener('mouseleave', function() {
+            card.style.transform = 'translateY(0)';
+            card.style.boxShadow = 'none';
+            card.style.backgroundColor = '';
+        });
+    });
+</script>
 
 @endsection

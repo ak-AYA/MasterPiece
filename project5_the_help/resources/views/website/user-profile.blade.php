@@ -62,7 +62,7 @@
                                 </td>
                                 <td>{{ $booking->service->name }}</td>
                                 <td>{{ $booking->payment->name }}</td>
-                                <td>{{ $booking->discount->amount }}</td>
+                              
                                 <td>{{ $booking->total_price }}</td>
                             </tr>
                             @endforeach

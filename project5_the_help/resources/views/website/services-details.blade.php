@@ -74,12 +74,14 @@
                             @endif
 
                             <!-- Booking Button on the Image -->
+                           
                             <div class="position-absolute top-50 start-50 translate-middle text-center">
                                 @if(Auth::guard('web')->check() && Auth::guard('web')->user()->role_id == 2)
                                 <a href="{{ route('user.booking.page', ['serviceId' => $service->id]) }}"
                                     class="btn btn-primary btn-lg px-5 py-3 rounded-pill">
                                     Book Now <i class="fas fa-arrow-right ms-2"></i>
-                                </a>
+                                    </a>
+
                                 @else
                                 <a href="{{ route('website.login.user') }}"
                                     class="btn btn-primary btn-lg px-5 py-3 rounded-pill">Login Now</a>

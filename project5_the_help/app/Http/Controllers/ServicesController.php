@@ -10,24 +10,39 @@ class ServicesController extends Controller
 {
     public function index(Request $request)
     {
-        $categories = Category::all(); 
-
+        // جلب جميع الفئات
+        $categories = Category::all();
+    
+        // الحصول على معرّف الفئة المحددة من الاستعلام
         $selectedCategoryId = $request->query('category_id');
-
+        
+        // جلب الاستعلام للبحث (إن وجد)
+        $searchQuery = $request->query('query');
+    
+        // إذا كان هناك فئة محددة، فلن يتم تصفية النتائج بناءً على الفئة
         if ($selectedCategoryId) {
-            $services = Service::where('category_id', $selectedCategoryId)->paginate(9);
+            $services = Service::where('category_id', $selectedCategoryId);
         } else {
-            $services = Service::paginate(9);
+            $services = Service::query(); // الحصول على جميع الخدمات
         }
-
-        // Calculate provider rating for each service
+    
+        // إذا كان هناك استعلام للبحث، فلنقوم بتصفية الخدمات بناءً عليه
+        if ($searchQuery) {
+            $services = $services->where('name', 'like', "%{$searchQuery}%")
+                                 ->orWhere('description', 'like', "%{$searchQuery}%");
+        }
+    
+        // تصفية النتائج حسب الفئة أو البحث
+        $services = $services->paginate(9);
+    
+        // حساب تقييم مقدم الخدمة لكل خدمة
         foreach ($services as $service) {
             $service->providerRating = $service->provider->reviews()->avg('stars');
         }
-
-        return view('website.services', compact('categories', 'services', 'selectedCategoryId'));
+    
+        return view('website.services', compact('categories', 'services', 'selectedCategoryId', 'searchQuery'));
     }
-
+    
     // Show services by category ID
     public function showServicesByCategory($id)
     {
