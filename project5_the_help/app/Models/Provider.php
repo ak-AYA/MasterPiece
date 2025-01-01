@@ -26,9 +26,9 @@ class Provider extends Authenticatable
     }
     
 
-public function reviews()
-{
-    return $this->hasMany(Review::class, 'provider_id'); 
-}
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'provider_id'); 
+    }
 
 }

@@ -30,25 +30,26 @@
         <!-- Main Content -->
         <div class="col-md-9">
             <div class="card p-3 border">
-                <div class="tab-content" id="providerDashboardContent">
-                    <!-- Profile Details Tab -->
-                    <div class="tab-pane fade show active" id="profile-details" role="tabpanel">
-                        @include('website.sections.providerSections.profileDetails')
-                    </div>
+                    <div class="tab-content" id="providerDashboardContent">
+                        <!-- Profile Details Tab -->
+                        <div class="tab-pane fade show active" id="profile-details" role="tabpanel">
+                            @include('website.sections.providerSections.profileDetails')
+                        </div>
 
-                    <!-- Service History Tab -->
-                    <div class="tab-pane fade" id="servicesProvider" role="tabpanel">
-                        @include('website.sections.providerSections.servicesProvider')
-                    </div>
+                        <!-- Service History Tab -->
+                        <div class="tab-pane fade" id="servicesProvider" role="tabpanel">
+                            @include('website.sections.providerSections.servicesProvider')
+                        </div>
 
-                    <!-- Bookings Tab -->
-                    <div class="tab-pane fade" id="bookingsProvider" role="tabpanel">
-                        @include('website.sections.providerSections.bookingsProvider')
-                    </div>
+                        <!-- Bookings Tab -->
+                        <div class="tab-pane fade" id="bookingsProvider" role="tabpanel">
+                            @include('website.sections.providerSections.bookingsProvider')
+                        </div>
 
-                    <!-- Reviews Tab -->
-                    <div class="tab-pane fade" id="reviewsProvider" role="tabpanel">
-                        @include('website.sections.providerSections.reviewsProvider')
+                        <!-- Reviews Tab -->
+                        <div class="tab-pane fade" id="reviewsProvider" role="tabpanel">
+                            @include('website.sections.providerSections.reviewsProvider')
+                        </div>
                     </div>
                 </div>
             </div>

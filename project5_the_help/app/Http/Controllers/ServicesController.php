@@ -10,32 +10,26 @@ class ServicesController extends Controller
 {
     public function index(Request $request)
     {
-        // جلب جميع الفئات
+
         $categories = Category::all();
-    
-        // الحصول على معرّف الفئة المحددة من الاستعلام
         $selectedCategoryId = $request->query('category_id');
-        
-        // جلب الاستعلام للبحث (إن وجد)
         $searchQuery = $request->query('query');
-    
-        // إذا كان هناك فئة محددة، فلن يتم تصفية النتائج بناءً على الفئة
+
         if ($selectedCategoryId) {
             $services = Service::where('category_id', $selectedCategoryId);
         } else {
-            $services = Service::query(); // الحصول على جميع الخدمات
+            $services = Service::query(); 
         }
     
-        // إذا كان هناك استعلام للبحث، فلنقوم بتصفية الخدمات بناءً عليه
+            // search
         if ($searchQuery) {
             $services = $services->where('name', 'like', "%{$searchQuery}%")
                                  ->orWhere('description', 'like', "%{$searchQuery}%");
         }
     
-        // تصفية النتائج حسب الفئة أو البحث
+
         $services = $services->paginate(9);
     
-        // حساب تقييم مقدم الخدمة لكل خدمة
         foreach ($services as $service) {
             $service->providerRating = $service->provider->reviews()->avg('stars');
         }

@@ -128,14 +128,14 @@ class ProviderProfileController extends Controller
     {
         $provider = Auth::user(); 
         $categories = Category::all(); 
-        $services = Service::with('category')->where('provider_id', Auth::id())->get();  // جلب خدمات البروفايدر فقط
+        $services = Service::with('category')->where('provider_id', Auth::id())->get();
         return view('website.provider-profile', compact('provider', 'categories', 'services'));
     }
 
     public function reviews()
     {
         $reviews = Review::with(['user', 'provider'])
-            ->where('is_approved', 1) // جلب المراجعات المعتمدة فقط
+            ->where('is_approved', 1)
             ->get();
     
         return view('website.provider-profile', compact('reviews'));

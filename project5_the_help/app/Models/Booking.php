@@ -43,6 +43,9 @@ class Booking extends Model
     {
         return $this->belongsTo(Discount::class);
     }
-
+    public function reviews()
+    {
+        return $this->hasMany(Review::class); 
+    }
 
 }

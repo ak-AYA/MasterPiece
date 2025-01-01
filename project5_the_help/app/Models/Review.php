@@ -34,5 +34,16 @@ public function provider()
     return $this->belongsTo(provider::class, 'provider_id'); 
 }
 
+public function service()
+{
+    return $this->belongsTo(Service::class, 'service_id');
+     
+}
+
+public function booking()
+{
+    return $this->belongsTo(Booking::class);
+}
+
 
 }

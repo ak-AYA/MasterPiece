@@ -61,21 +61,23 @@ Route::controller(WebsiteController::class)->name('website.')->group(function ()
 
 
 
-
 Route::prefix('user')->name('user.')->group(function () {
-    // user only routes
-
-
+    // User profile routes
     Route::get('/profile', [UserProfileController::class, 'index'])->name('user.profile');
     Route::put('/update-profile', [UserProfileController::class, 'update'])->name('user.updateProfile');
-    
-    Route::post('/booking/checkout', [UserBookingController::class, 'processBooking'])->name('booking.checkout');
 
+    // Booking routes
+    Route::post('/booking/checkout', [UserBookingController::class, 'processBooking'])->name('booking.checkout');
     Route::get('/booking/{serviceId}', [UserBookingController::class, 'showBookingPage'])->name('booking.page');
-   
     Route::get('/booking/invoice/{bookingId}', [UserBookingController::class, 'showInvoice'])->name('booking.invoice');
 
+    // Payment route (Stripe)
+    Route::post('/process-stripe-payment', [UserBookingController::class, 'processStripePayment'])->name('processStripePayment');
+
+    Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+
 });
+
     
 
 

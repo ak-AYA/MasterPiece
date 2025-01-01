@@ -3,125 +3,127 @@
 @section('content')
 
 <style>
-    .booking-container {
-        display: flex;
-        gap: 20px;
-        margin: 50px auto;
-        max-width: 1200px;
-    }
+.booking-container {
+    display: flex;
+    gap: 20px;
+    margin: 50px auto;
+    max-width: 1200px;
+}
 
-    .booking-details,
-    .booking-summary {
-        background: #F6F6F6;
-        border-radius: 10px;
-        padding: 20px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
+.booking-details,
+.booking-summary {
+    background: #F6F6F6;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-    .booking-details {
-        flex: 3;
-    }
+.booking-details {
+    flex: 3;
+}
 
-    .booking-summary {
-        flex: 1.5;
-    }
+.booking-summary {
+    flex: 1.5;
+}
 
-    .summary-header {
-        font-weight: bold;
-        border-bottom: 2px solid #ddd;
-        margin-bottom: 15px;
-        padding-bottom: 10px;
-    }
+.summary-header {
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+}
 
-    .summary-item {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 10px;
-    }
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
 
-    .total-price {
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: #007bff;
-    }
+.total-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #007bff;
+}
 
-    .btn-primary {
-        width: 100%;
-    }
+.btn-primary {
+    width: 100%;
+}
 
-    /* ----------- */
-    /* General Form Styling */
+/* ----------- */
+/* General Form Styling */
+.form-label {
+    font-size: 1rem;
+}
+
+.input-group {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.input-group-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+}
+
+.form-control {
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+
+.form-control .read {
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+
+/* Icon Styling */
+.bi {
+    font-size: 1.5rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
     .form-label {
-        font-size: 1rem;
-    }
-
-    .input-group {
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        overflow: hidden;
+        font-size: 0.9rem;
     }
 
     .input-group-text {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.2rem;
-        padding: 0.5rem;
+        font-size: 1rem;
     }
 
     .form-control {
-        padding: 0.8rem;
-        font-size: 1rem;
-        border: none;
-        outline: none;
+        font-size: 0.9rem;
     }
+}
 
-    .form-control:focus {
-        box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
-    }
+.form-select {
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
 
-    .form-control .read {
-        padding: 0.8rem;
-        font-size: 1rem;
-        border: none;
-        outline: none;
-    }
+.form-select:focus {
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+    border-color: #007bff;
+}
 
-    .form-control:focus {
-        box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
-    }
-
-    /* Icon Styling */
-    .bi {
-        font-size: 1.5rem;
-    }
-
-    /* Responsive Adjustments */
-    @media (max-width: 768px) {
-        .form-label {
-            font-size: 0.9rem;
-        }
-
-        .input-group-text {
-            font-size: 1rem;
-        }
-
-        .form-control {
-            font-size: 0.9rem;
-        }
-    }
-
-    .form-select {
-        padding: 0.8rem;
-        font-size: 1rem;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-    }
-
-    .form-select:focus {
-        box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
-        border-color: #007bff;
-    }
+/* --------payment card-------- */
 </style>
 
 <section id="our-services" class="pt-2 mt-4">
@@ -130,7 +132,7 @@
         <div class="booking-container row">
             <!-- Booking Details Section (Left Side - 70%) -->
             <div class="col-lg-8 col-md-8 col-12 booking-details">
-                <form action="{{ route('user.booking.checkout') }}" method="POST">
+                <form id="booking-form" action="{{ route('user.booking.checkout') }}" method="POST">
                     @csrf
                     <input type="hidden" name="service_id" value="{{ $service->id }}">
 
@@ -152,8 +154,8 @@
                             <label for="serviceType" class="form-label">Service Name</label>
                             <div class="input-group shadow-sm">
                                 <span class="input-group-text bg-dark border-0"></span>
-                                <input type="text" class="form-control" id="serviceType"
-                                    value="{{ $service->name }}" readonly>
+                                <input type="text" class="form-control" id="serviceType" value="{{ $service->name }}"
+                                    readonly>
                             </div>
                         </div>
                     </div>
@@ -167,8 +169,8 @@
                                     <i class="bi bi-calendar-date"></i>
                                 </span>
                                 <input type="date" id="select-date" name="date"
-                                    class="form-control border-0 shadow-none"
-                                    value="{{ now()->format('Y-m-d') }}" min="{{ now()->format('Y-m-d') }}" required>
+                                    class="form-control border-0 shadow-none" value="{{ now()->format('Y-m-d') }}"
+                                    min="{{ now()->format('Y-m-d') }}" required>
                             </div>
                         </div>
 
@@ -207,23 +209,37 @@
                     </div>
 
                     <hr>
-                    <div class="mb-3 row align-items-center">
+                    <!-- Payment Section -->
+                    <div class="card shadow-lg p-4"
+                        style="max-width: 500px; margin: auto; border-radius: 15px; background-color: #f8f9fa;">
+                        <h5 class="card-title text-center mb-4">Choose Payment</h5>
+
                         <!-- Payment Method -->
-                        <div class="mb-3">
-                            <label for="payment_id" class="form-label">Payment</label>
-                            <div class="input-group shadow-sm">
-                                <select name="payment_id" class="form-select form-select-lg" required>
-                                    <option value="" disabled selected>Select Payment Method</option>
-                                    @foreach($payments as $payment)
-                                        <option value="{{ $payment->id }}">{{ $payment->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                        <div class="mb-4">
+                            <label for="payment_id" class="form-label">Payment Method</label>
+                            <select id="payment-method" name="payment_id" class="form-select form-select-lg" required>
+                                <option value="" disabled selected>Select Payment Method</option>
+                                @foreach($payments as $payment)
+                                <option value="{{ $payment->id }}" data-name="{{ $payment->name }}">{{ $payment->name }}
+                                </option>
+                                @endforeach
+                            </select>
                         </div>
 
+                        <!-- Stripe Card Element -->
+                        <div id="credit-card-form" style="display: none;">
+                            <p class="text-muted">Enter your credit card details:</p>
+                            <div id="card-element" class="form-control"></div>
+                            <div id="card-errors" role="alert" style="color: red; font-size: 0.9rem;"></div>
+                        </div>
+
+                        <!-- Complete Booking Button -->
+                        <button id="pay-now" class="btn btn-primary w-100 mt-4" style="border-radius: 25px;">Complete
+                            Booking</button>
                     </div>
-                    <button class="btn btn-primary mt-4 w-50  text-center">Proceed to Checkout</button>
+
                 </form>
+
             </div>
 
             <!-- Booking Summary Section -->
@@ -272,5 +288,67 @@
     </div>
 </section>
 
+<script>
+document.getElementById("payment-method").addEventListener("change", function() {
+    const selectedOption = this.options[this.selectedIndex];
+    const paymentName = selectedOption.getAttribute("data-name");
+
+    if (paymentName === "Visa") {
+        document.getElementById("credit-card-form").style.display = "block";
+    } else {
+        document.getElementById("credit-card-form").style.display = "none";
+    }
+});
+</script>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+const stripe = Stripe(
+    'pk_test_51Q7UBLE1sodnmKgH7yJ43hKLPzytagMhBL6Jc00UXJ0tAw3sFLGVlIi82G0LxzP9tjXWWFiTbxaCgQYnGcmxOe3U00RXvcK6fi');
+const elements = stripe.elements();
+const card = elements.create('card');
+card.mount('#card-element');
+
+// Handle Card Errors
+card.on('change', ({
+    error
+}) => {
+    const displayError = document.getElementById('card-errors');
+    displayError.textContent = error ? error.message : '';
+});
+
+// Form Submission with Stripe
+const form = document.getElementById('booking-form');
+form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    // Create payment method
+    const {
+        paymentMethod,
+        error
+    } = await stripe.createPaymentMethod({
+        type: 'card',
+        card: card,
+    });
+
+    if (error) {
+        document.getElementById('card-errors').textContent = error.message;
+    } else {
+        // Append payment method ID to the form
+        const hiddenInput = document.createElement('input');
+        hiddenInput.type = 'hidden';
+        hiddenInput.name = 'payment_method_id';
+        hiddenInput.value = paymentMethod.id;
+        form.appendChild(hiddenInput);
+
+        // Submit the form
+        form.submit();
+    }
+});
+
+document.getElementById('pay-now').addEventListener('click', function() {
+    document.getElementById('payment-form').submit();
+});
+</script>
 
 @endsection

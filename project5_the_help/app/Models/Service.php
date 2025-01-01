@@ -45,6 +45,9 @@ class Service extends Model
     {
         return $this->hasMany(Booking::class);
     }
-
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'provider_id'); 
+    }
 
 }
