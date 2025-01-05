@@ -81,9 +81,9 @@
 <div class="container mt-4">
     <div class="page-header d-flex justify-content-between align-items-center bg-light p-3 mb-4 rounded">
         <h2>Service Management</h2>
-        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addServiceModal">
+        <!-- <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addServiceModal">
             Add New Service
-        </button>
+        </button> -->
     </div>
 
     @if(session('success'))
@@ -113,9 +113,9 @@
                     <td>{{ $service->name }}</td>
                     <td>
                 
-                    <img src="{{ asset('assetts/images/services/' . $service->image) }}"
+                    <img src="{{asset('storage/' . $service->image) }}"
                         class="card-img-top rounded-top" alt="{{ $service->name }}"
-                        style="height: 150px; object-fit: cover;">
+                        style="height: 100px; object-fit: cover;">
 
     
 

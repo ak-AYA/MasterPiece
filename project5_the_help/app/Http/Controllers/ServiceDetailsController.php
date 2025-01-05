@@ -10,8 +10,13 @@ class ServiceDetailsController extends Controller
     public function show($id)
     {
         $service = Service::findOrFail($id);
+        $category = $service->category;
         $categories = Category::all(); 
-        return view('website.services-details', compact('service', 'categories'));
+        $services = Service::all();
+            // Get all reviews for the provider
+        $providerReviews = $service->provider->reviews;
+
+        return view('website.services-details', compact('service','services', 'categories', 'category', 'providerReviews'));
     }
 
     public function showServicesByCategory($id)

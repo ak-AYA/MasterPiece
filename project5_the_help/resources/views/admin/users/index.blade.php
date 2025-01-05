@@ -81,9 +81,9 @@
 <div class="container mt-4">
     <div class="page-header d-flex justify-content-between align-items-center bg-light p-3 mb-4 rounded">
         <h2>User Management</h2>
-        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addUserModal">
+        <!-- <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addUserModal">
             Add New User
-        </button>
+        </button> -->
     </div>
 
 
@@ -204,19 +204,19 @@
                 <div class="modal-body">
                     <div class="mb-2">
                         <label for="editUserName" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="editUserName" name="name" required>
+                        <input type="text" class="form-control" id="editUserName" name="name" readonly>
                     </div>
                     <div class="mb-2">
                         <label for="editUserEmail" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="editUserEmail" name="email" required>
+                        <input type="email" class="form-control" id="editUserEmail" name="email" readonly>
                     </div>
                     <div class="mb-2">
                         <label for="editUserPhone" class="form-label">Phone</label>
-                        <input type="text" class="form-control" id="editUserPhone" name="phone" required>
+                        <input type="text" class="form-control" id="editUserPhone" name="phone" readonly>
                     </div>
                     <div class="mb-2">
                         <label for="editUserLocation" class="form-label">Location</label>
-                        <input type="text" class="form-control" id="editUserLocation" name="location" required>
+                        <input type="text" class="form-control" id="editUserLocation" name="location" readonly>
                     </div>
                     <div class="mb-2">
                         <label for="editUserStatus" class="form-label">Status</label>

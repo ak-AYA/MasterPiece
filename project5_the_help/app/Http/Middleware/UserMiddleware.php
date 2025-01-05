@@ -15,6 +15,6 @@ class UserMiddleware
             return $next($request);  
         }
 
-        return redirect('/login')->with('status', 'Access Denied');
+        return redirect('/')->with('status', 'Access Denied');
     }
 }

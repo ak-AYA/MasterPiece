@@ -27,7 +27,7 @@
                             <form action="{{ route('provider.provider.updateBookingStatus', $booking->id) }}" method="POST">
                                 @csrf
                                 @method('PATCH')
-                                <select name="status" class="form-select" onchange="this.form.submit()" {{ $booking->status === 'completed' || $booking->status === 'cancelled' ? 'disabled' : '' }}>
+                                <select name="status" class="form-select-booking" onchange="this.form.submit()" {{ $booking->status === 'completed' || $booking->status === 'cancelled' ? 'disabled' : '' }}>
                                     <option value="pending" {{ $booking->status === 'pending' ? 'selected' : '' }}>Pending</option>
                                     <option value="confirmed" {{ $booking->status === 'confirmed' ? 'selected' : '' }}>Confirmed</option>
                                     <option value="completed" {{ $booking->status === 'completed' ? 'selected' : '' }}>Completed</option>
@@ -76,7 +76,7 @@ document.querySelectorAll('.status-dropdown').forEach(dropdown => {
 });
 </script>
 <script>
-document.querySelectorAll('.form-select').forEach(select => {
+document.querySelectorAll('.form-select-booking').forEach(select => {
     select.addEventListener('change', function() {
         if (confirm('Are you sure you want to change the booking status?')) {
             this.form.submit();

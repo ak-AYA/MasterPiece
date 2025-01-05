@@ -2,13 +2,55 @@
 @section('title', ' User Register')
 @section('content')
 
+<style>
+    /* Remove padding from the container and row */
+    .container.p-0 {
+        padding: 0;
+        max-width: 1100px;
+        /* Limit the width of the container */
+    }
 
-<section id="user-registration" class="py-5" style="background-color: #ffffff;">
-    <div class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card shadow rounded-4 p-4">
-                    <h3 class="mb-4 text-center">User Registration</h3>
+    /* Ensure no gutters between columns */
+    .row.no-gutters {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    /* Remove padding from columns */
+    .col-md-5.p-0,
+    .col-lg-6.p-0 {
+        padding: 0;
+    }
+
+    /* Ensure equal height for both sections and reduce height */
+    .provider-login-image {
+        height: 100vh;
+        /* Reduced height for image section */
+    }
+
+    .card {
+        height: 100vh;
+        /* Reduced height for form section */
+    }
+</style>
+
+
+<section id="user-registration" class="py-5 mt-5" style="background-color: #ffffff;">
+    <div class="container p-0 mt-5">
+        <div class="row no-gutters">
+            <!-- Left Section: Image with text -->
+            <div class="col-md-5 col-lg-6 p-0" style="color:#fff">
+                <div class="provider-login-image"
+                    style="background-image: url('/assetts/images/comfy2.jpg'); height: 100vh; background-size: cover; background-position: center; display: flex; flex-direction: column; justify-content: center; color: #fff; text-align: center;">
+                    <h3 class="text-uppercase" style="color:#000; text-shadow: 2px 2px 4px rgb(255, 255, 255);">Welcome!</h3>
+                    <p style="color:#000; text-shadow: 2px 2px 4px rgb(255, 255, 255);">Create your account and explore our services.</p>
+                </div>
+            </div>
+
+            <!-- Right Section: Registration Form -->
+            <div class="col-md-7 col-lg-6 p-0">
+                <div class="card shadow rounded-0 p-5" style="border-radius: 0; height: 100vh;">
+                    <h3 class="mb-4">User Registration</h3>
                     <form method="POST" action="{{ route('website.register.user.submit') }}" id="userRegisterForm">
                         @csrf
                         <div class="mb-3 text-start">
@@ -43,9 +85,8 @@
                                 <div class="text-danger mt-1 d-none" id="confirmPasswordError">Passwords do not match</div>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-center mb-3">
-                            <button type="submit" class="btn btn-primary">Register</button>
-                        </div>
+                        <button type="submit" class="btn btn-primary btn-sm mt-3">Register</button>
+                        <div class="text-danger mt-3 d-none" id="userRegisterError">An error occurred during registration</div>
                     </form>
                     <p class="mt-3">Already have an account? <a href="{{ route('website.login.user') }}" class="text-decoration-underline">Login here</a></p>
                 </div>
@@ -53,6 +94,7 @@
         </div>
     </div>
 </section>
+
 
 
 <script>

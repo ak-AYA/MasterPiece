@@ -4,10 +4,13 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\aboutController;
 use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\UserBookingController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\BookingController;
 use App\Http\Controllers\Admin\PaymentController;
@@ -19,7 +22,6 @@ use App\Http\Controllers\ServiceDetailsController;
 use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\Categoriescontroller;
-use App\Http\Controllers\UserBookingController;
 use App\Http\Controllers\User\UserProfileController;
 use App\Http\Controllers\Auth\UserRegisterController;
 use App\Http\Controllers\Auth\ProviderLoginController;
@@ -56,6 +58,13 @@ Route::controller(WebsiteController::class)->name('website.')->group(function ()
     Route::get('/login/provider', [ProviderLoginController::class, 'showLoginForm'])->name('login.provider');
     Route::post('/login/provider', [ProviderLoginController::class, 'login'])->name('login.provider.submit');
     Route::post('/logout/provider', [ProviderLoginController::class, 'logout'])->name('logout.provider');
+
+
+
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+    Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+    Route::get('/about', [aboutController::class, 'index'])->name('about.index');
 });
 
 
@@ -73,8 +82,7 @@ Route::prefix('user')->name('user.')->group(function () {
 
     // Payment route (Stripe)
     Route::post('/process-stripe-payment', [UserBookingController::class, 'processStripePayment'])->name('processStripePayment');
-
-    Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+    Route::post('/reviews', [UserProfileController::class, 'store'])->name('reviews.store');
 
 });
 
@@ -116,12 +124,13 @@ Route::middleware(['auth:provider', 'isProvider'])->prefix('provider')->name('pr
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/welcome', [HomeController::class, 'index'])->name('welcome');
 
 
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
 
 
 

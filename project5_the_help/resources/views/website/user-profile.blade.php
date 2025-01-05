@@ -3,9 +3,9 @@
 @section('content')
 
 <div class="container mt-5 pt-4">
-    <div class="row">
+    <div class="row mt-5 pt-4 mb-5">
         <!-- Sidebar -->
-        <div class="col-md-3">
+        <div class="col-md-3 ">
             <div class="card shadow rounded-4 p-4">
                 <h4 class="text-center">User Dashboard</h4>
                 <div class="text-center mt-4">

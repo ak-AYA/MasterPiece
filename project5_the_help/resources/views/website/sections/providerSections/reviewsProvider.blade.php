@@ -11,7 +11,6 @@
                         <th>#</th>
                         <th>Stars</th>
                         <th>Text</th>
-                        <th>Image</th>
                         <th>Date</th>
                         <th>User</th>
                     </tr>
@@ -34,13 +33,7 @@
                                 <i class="fas fa-eye"></i>
                             </button>
                         </td>
-                        <td>
-                            @if($review->image)
-                                <img src="{{ asset('uploads/reviews/' . $review->image) }}" alt="review Image" style="width: 60px; height: auto;">
-                            @else
-                                <span>No Image</span>
-                            @endif
-                        </td>
+                    
                         <td>{{ $review->date }}</td>
                         <td>{{ $review->user->name ?? 'Unknown User' }}</td>
                     </tr>

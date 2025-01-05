@@ -80,9 +80,9 @@
 <div class="container mt-4">
     <div class="page-header d-flex justify-content-between align-items-center bg-light p-3 mb-4 rounded">
         <h2>Providers Management</h2>
-        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addProviderModal">
+        <!-- <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addProviderModal">
             Add New Provider
-        </button>
+        </button> -->
     </div>
 
 
@@ -202,19 +202,19 @@
                 <div class="modal-body">
                     <div class="mb-2">
                         <label for="editProviderName" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="editProviderName" name="name" required>
+                        <input type="text" class="form-control" id="editProviderName" name="name" readonly>
                     </div>
                     <div class="mb-2">
                         <label for="editProviderEmail" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="editProviderEmail" name="email" required>
+                        <input type="email" class="form-control" id="editProviderEmail" name="email" readonly>
                     </div>
                     <div class="mb-2">
                         <label for="editProviderPhone" class="form-label">Phone</label>
-                        <input type="text" class="form-control" id="editProviderPhone" name="phone" required>
+                        <input type="text" class="form-control" id="editProviderPhone" name="phone" readonly>
                     </div>
                     <div class="mb-2">
                         <label for="editProviderLocation" class="form-label">Location</label>
-                        <input type="text" class="form-control" id="editProviderLocation" name="location" required>
+                        <input type="text" class="form-control" id="editProviderLocation" name="location" readonly>
                     </div>
                     <div class="mb-2">
                         <label for="editProviderStatus" class="form-label">Status</label>

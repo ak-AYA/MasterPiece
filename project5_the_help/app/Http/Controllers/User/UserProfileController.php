@@ -25,8 +25,10 @@ class UserProfileController extends Controller
         $completedBookings = Booking::where('status', 'completed')
         ->doesntHave('reviews')
         ->get();
+
+        $bookings = Booking::where('user_id', $user->id)->paginate(5);
         
-        return view('website.user-profile', compact('user', 'completedBookings', 'reviews'));
+        return view('website.user-profile', compact('user', 'completedBookings', 'reviews', 'bookings'));
     }
 
     public function update(Request $request)

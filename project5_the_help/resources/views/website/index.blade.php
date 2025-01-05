@@ -3,14 +3,18 @@
 @section('content')
 
 
-<section id="slider" class="mt-5 pt-4">
+<section id="slider" class="mt-4 pt-4">
     <div class="swiper slider position-relative">
         <div class="swiper-wrapper">
-            <div class="swiper-slide d-flex"
-                style="background-image: url('/assetts/images/slider-image.jpg'); background-size: cover; background-repeat: no-repeat; height: 80vh; background-position: center; height: 80vh;">
+            <div class="swiper-slide d-flex" style="height: 100vh; position: relative;">
+                <video autoplay muted loop class="background-video"
+                    style="object-fit: cover; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
+                    <source src="/assetts/images/7578552-uhd_3840_2160_30fps.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
                 <div class="banner-content px-5 py-4 text-center m-auto py-5 rounded-4 shadow">
                     <h2 class="mb-0">Best Cleaning Services</h2>
-                    <p class="fs-4 text-capitalize">Welcome to Super Clean Services, your one-stop solution for
+                    <p class="fs-4 text-capitalize">Welcome to The Help Services, your one-stop solution for
                         exceptional cleaning services!</p>
 
                     @if(Auth::guard('provider')->check())
@@ -21,23 +25,25 @@
                     <a href="{{ route('website.services.index') }}" class="btn btn-primary">Explore Services</a>
                     @else
                     <!-- not signed user-->
-                    <a href="{{ route('website.register.user') }}" class="btn btn-primary">I'm A User</a>
-                    <a href="{{ route('website.register.provider') }}" class="btn btn-secondary">I'm A Provider</a>
+                    <a href="{{ route('website.login.user') }}" class="btn btn-primary">Need help?</a>
+                    <a href="{{ route('website.login.provider') }}" class="btn btn-secondary">Ready to Help!</a>
                     @endif
                 </div>
-
             </div>
 
             <div class="swiper-slide d-flex"
-                style="background-image: url('/assetts/images/slider-image1.jpg'); background-size: cover; background-repeat: no-repeat; height: 80vh; background-position: center; height: 80vh;">
+                style="background-image: url('/assetts/images/pexels-matilda-wormwood-4099259.jpg'); background-size: cover; background-repeat: no-repeat; height: 100vh; background-position: center;">
                 <div class="banner-content px-5 py-4 text-center m-auto py-5 rounded-4 shadow">
-                    <h2 class="mb-0">Best Window Cleaning</h2>
-                    <p class="fs-4 text-capitalize">Enjoy crystal-clear views with free window cleaning services. View
-                        our cleaning services now!</p>
-                    <a href="services.html" class="btn btn-primary mt-3">Our Services</a>
+                    <h2 class="mb-0">Set back and relax</h2>
+                    <p class="fs-4 text-capitalize">Experience ultimate comfort and save precious time with our expert
+                        services. Let us handle the details so you can focus on what truly matters. Enjoy a hassle-free
+                        experience today!</p>
+
+                    <a href="{{ route('website.services.index') }}" class="btn btn-primary mt-3">Our Services</a>
                 </div>
             </div>
         </div>
+
         <div class="position-absolute top-0 bottom-0 end-0 m-auto me-0 me-md-5 main-slider-button-next">
             <svg class="chevron-forward-circle light-color" width="60" height="60">
                 <use xlink:href="#chevron-forward-circle"></use>
@@ -51,7 +57,7 @@
     </div>
 </section>
 
-<section id="features" class="padding-small">
+<section id="features" class="position-relative bg-gray mb-5 pt-5 pb-5">
     <div class="container">
 
         <div class="section-title mb-5 text-center">
@@ -60,21 +66,22 @@
         </div>
 
         <div class="row">
-    @foreach($categories as $category)
-    <div class="col-md-4">
-        <a href="{{ route('website.services.category', ['id' => $category->id]) }}">
-            <div class="feature mb-4 text-center px-3 py-4 border rounded-3" 
-                 style="position: relative; transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;">
-                <img src="{{ asset('storage/' . $category->image) }}" class="card-img-top"
-                     alt="{{ $category->name }}" style="width: 100%; height: 50px; object-fit: contain; transition: transform 0.3s ease;">
-                <hr>
-                <h6 class="mb-0">{{ $category->name }}</h6>
-                <hr>
+            @foreach($categories as $category)
+            <div class="col-md-4">
+                <a href="{{ route('website.services.category', ['id' => $category->id]) }}">
+                    <div class="feature mb-4 text-center px-3 py-4 border rounded-3"
+                        style="position: relative; transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;">
+                        <img src="{{ asset('storage/' . $category->image) }}" class="card-img-top"
+                            alt="{{ $category->name }}"
+                            style="width: 100%; height: 50px; object-fit: contain; transition: transform 0.3s ease;">
+                        <hr>
+                        <h6 class="mb-0">{{ $category->name }}</h6>
+                        <hr>
+                    </div>
+                </a>
             </div>
-        </a>
-    </div>
-    @endforeach
-</div>
+            @endforeach
+        </div>
     </div>
 </section>
 
@@ -87,140 +94,206 @@
     <div class="swiper services-swiper py-3">
         <div class="swiper-wrapper ms-0 ps-0 ms-sm-5 ps-sm-5">
             <div class="swiper-slide mt-5 service text-center">
-                <img class="rounded-circle mb-4 img-fluid" src="{{asset  ('assetts') }}/images/service1.jpg" alt="img">
-                <h6 class="mb-0"><a href="service-single.html">Deep Cleaning</a></h6>
-                <p>Our deep cleaning services leave no cranny untouched clean.</p>
-            </div>
-            <div class="swiper-slide service text-center">
-                <img class="rounded-circle mb-4 img-fluid" src="{{asset  ('assetts') }}/images/service2.jpg" alt="img">
-                <h6 class="mb-0"><a href="service-single.html">Window Cleaning</a></h6>
-                <p>Enjoy crystal-clear views with free window cleaning services.</p>
+                <img class="rounded-circle mb-4 img-fluid" src="{{asset('assetts')}}/images/cleaning service (1).gif"
+                    alt="img">
+                <h6 class="mb-0">Choose Your Cleaning Service</h6>
+                <p>Let us know what you would like cleaned, and we'll give you the best prices and providers on the
+                    market.</p>
             </div>
             <div class="swiper-slide mt-5 pt-5 service text-center">
-                <img class="rounded-circle mb-4 img-fluid" src="{{asset  ('assetts') }}/images/service3.jpg" alt="img">
-                <h6 class="mb-0"><a href="service-single.html">Office Cleaning</a></h6>
-                <p>Boost productivity and employee with well-maintained office.</p>
+                <img class="rounded-circle mb-4 img-fluid" src="{{asset('assetts')}}/images/Events.gif" alt="img">
+                <h6 class="mb-0">Schedule Your Cleaning Time</h6>
+                <p>Our online booking system lets you choose the most convenient date and time for you.</p>
             </div>
             <div class="swiper-slide mt-5 pt-1 service text-center">
-                <img class="rounded-circle mb-4 img-fluid" src="{{asset  ('assetts') }}/images/service4.jpg" alt="img">
-                <h6 class="mb-0"><a href="service-single.html">Roof Cleaning</a></h6>
-                <p>Create a hygienic workplace commercial cleaning services.</p>
+                <img class="rounded-circle mb-4 img-fluid" src="{{asset('assetts')}}/images/Drinking tea.gif" alt="img">
+                <h6 class="mb-0">Enjoy A Clean, Tidy Home</h6>
+                <p>Now you just sit back and relax, while we ensure your home is spotless, top-to-bottom.</p>
             </div>
-            <div class="swiper-slide mt-3 service text-center">
-                <img class="rounded-circle mb-4 img-fluid" src="{{asset  ('assetts') }}/images/service5.jpg" alt="img">
-                <h6 class="mb-0"><a href="service-single.html">Carpet Cleaning</a></h6>
-                <p>Boost productivity and employee with well-maintained office.</p>
+            <div class="swiper-slide mt-5 pt-1 service text-center">
+                <img class="rounded-circle mb-4 img-fluid" src="{{asset('assetts')}}/images/Online Review.gif"
+                    alt="img">
+                <h6 class="mb-0">Leave A Review</h6>
+                <p>Your feedback means a lot to us! Every review helps us improve and serve you better. Share your
+                    experience!</p>
             </div>
-            <div class="swiper-slide mt-3 service text-center">
-                <img class="rounded-circle mb-4 img-fluid" src="{{asset  ('assetts') }}/images/service2.jpg" alt="img">
-                <h6 class="mb-0"><a href="service-single.html">Window Cleaning</a></h6>
-                <p>Enjoy crystal-clear views with free window cleaning services.</p>
+            <div class="swiper-slide mt-5 pt-1 service text-center">
+                <img class="rounded-circle mb-4 img-fluid" src="{{asset('assetts')}}/images/Conversation.gif" alt="img">
+                <h6 class="mb-0">Recommend Us</h6>
+                <p>Loved our service? Share it with your friends and let them enjoy the same quality!</p>
             </div>
-            <div class="swiper-slide mt-3 service text-center">
-                <img class="rounded-circle mb-4 img-fluid" src="{{asset  ('assetts') }}/images/service4.jpg" alt="img">
-                <h6 class="mb-0"><a href="service-single.html">Roof Cleaning</a></h6>
-                <p>Create a hygienic workplace commercial cleaning services.</p>
+            <div class="swiper-slide mt-5 pt-1 service text-center">
+
+                <h6 class="mb-0"></h6>
+                <p></p>
             </div>
+
         </div>
     </div>
 </section>
+
+
+
+<section id="about-us" class="position-relative bg-gray mb-5 pt-5 pb-5">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="imageblock me-4">
+
+                    <img class="img-fluid" src="{{asset  ('assetts') }}/images/about1.jpg" alt="img">
+
+                </div>
+            </div>
+
+            <div class="col-md-6 mt-5">
+                <div class="section-title mb-4">
+                    <p class="mb-2 fs-4 text-capitalize">Explore Our Features</p>
+                    <h3>Welcome To The Help</h3>
+                </div>
+                <br>
+                <!-- Points Section -->
+                <div class="row">
+                    <!-- Section for Users -->
+                    <div class="col-lg-6 col-md-6 service">
+                        <h4 class="mb-3">For Users</h4>
+                        <div class="price-option mt-3">
+                            <p><span class="text-primary">✓</span> Easy online booking system</p>
+                            <p><span class="text-primary">✓</span> Affordable and transparent pricing</p>
+                            <p><span class="text-primary">✓</span> Flexible scheduling to fit your needs</p>
+                            <p><span class="text-primary">✓</span> Access to top-rated service providers</p>
+                            <p><span class="text-primary">✓</span> Eco-friendly and safe cleaning solutions</p>
+                            <p><span class="text-primary">✓</span> 24/7 customer support for assistance</p>
+                        </div>
+                    </div>
+
+                    <!-- Section for Providers -->
+                    <div class="col-lg-6 col-md-6 service">
+                        <h4 class="mb-3">For Providers</h4>
+                        <div class="price-option mt-3">
+                            <p><span class="text-primary">✓</span> Increase visibility and reach more clients</p>
+                            <p><span class="text-primary">✓</span> Flexible work schedule management</p>
+                            <p><span class="text-primary">✓</span> Transparent payout system</p>
+                            <p><span class="text-primary">✓</span> Tools and resources for professional growth</p>
+                            <p><span class="text-primary">✓</span> Dedicated support for service providers</p>
+                            <p><span class="text-primary">✓</span> Build trust with verified user reviews</p>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+
 
 <section id="about-us-2">
     <div class="container">
-      <div class="row align-items-center">
+        <div class="row align-items-center">
 
-        <div class="col-md-6 mt-4">
-          <div class="section-title mb-4">
-            <p class="mb-2 fs-4 text-capitalize">Our Achievements</p>
-            <h3>Why To Choose Us</h3>
-          </div>
-          <p>At SuperClean, we prioritize customer satisfaction and tailor our services to meet your specific needs. Using cutting-edge equipment and eco-friendly products, we leave no detail untouched, providing thorough and meticulous cleaning for every corner of your space.</p>
-          <a class="btn btn-primary mt-4" href="services.html">Get to knoow us</a>
+            <div class="col-md-6 mt-4">
+                <div class="section-title mb-4">
+                    <p class="mb-2 fs-4 text-capitalize">Our Achievements</p>
+                    <h3>Why We Stand Out</h3>
+                </div>
+                <p>At Help My Cleaning, we prioritize your satisfaction by customizing our services to match your unique
+                    needs. With advanced tools and eco-friendly products, we ensure every corner of your space is
+                    spotless and cared for with attention to detail.</p>
+                <a class="btn btn-primary mt-4" href="{{ route('website.about.index')}}">Get to knoow us</a>
+            </div>
+
+            <div class="col-md-6 mt-4">
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="counter-info text-center">
+                            <div
+                                class="counter-number text-primary display-2 fw-semibold d-flex align-items-center justify-content-center">
+                                <span class="counter-prefix">+</span>
+                                <h5 class="timer display-4 fw-bold m-0" data-to="120">0</h5>
+                            </div>
+                            <p class="counter-description">Happy Clients</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="counter-info text-center">
+                            <div
+                                class="counter-number text-primary display-2 fw-semibold d-flex align-items-center justify-content-center">
+                                <span class="counter-prefix">+</span>
+                                <h5 class="timer display-4 fw-bold m-0" data-to="26">0</h5>
+                            </div>
+                            <p class="counter-description">Total Branches</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="counter-info text-center">
+                            <div
+                                class="counter-number text-primary display-2 fw-semibold d-flex align-items-center justify-content-center">
+                                <span class="counter-prefix">+</span>
+                                <h5 class="timer display-4 fw-bold m-0" data-to="50">0</h5>
+                            </div>
+                            <p class="counter-description">Pro Cleaners</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="counter-info text-center">
+                            <div
+                                class="counter-number text-primary display-2 fw-semibold d-flex align-items-center justify-content-center">
+                                <span class="counter-prefix">+</span>
+                                <h5 class="timer display-4 fw-bold m-0" data-to="3">0</h5>
+                            </div>
+                            <p class="counter-description">Years Experience</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
         </div>
-
-        <div class="col-md-6 mt-4">
-
-          <div class="row">
-        
-            <div class="col-md-6">
-              <div class="counter-info text-center">
-                <div class="counter-number text-primary display-2 fw-semibold d-flex align-items-center justify-content-center">
-                  <span class="counter-prefix">+</span>
-                  <h5 class="timer display-4 fw-bold m-0">5120</h5>
-                </div>
-                <p class="counter-description">Happy Clients</p>
-              </div>
-            </div>
-    
-            <div class="col-md-6">
-              <div class="counter-info text-center">
-                <div class="counter-number text-primary display-2 fw-semibold d-flex align-items-center justify-content-center">
-                  <span class="counter-prefix">+</span>
-                  <h5 class="timer display-4 fw-bold m-0" data-to="5120" data-speed="8000">26</h5>
-                </div>
-                <p class="counter-description">Total Branches</p>
-              </div>
-            </div>
-    
-            <div class="col-md-6">
-              <div class="counter-info text-center">
-                <div class="counter-number text-primary display-2 fw-semibold d-flex align-items-center justify-content-center">
-                  <span class="counter-prefix">+</span>
-                  <h5 class="timer display-4 fw-bold m-0" data-to="5120" data-speed="8000">54</h5>
-                </div>
-                <p class="counter-description">Pro Cleaners</p>
-              </div>
-            </div>
-    
-            <div class="col-md-6">
-              <div class="counter-info text-center">
-                <div class="counter-number text-primary display-2 fw-semibold d-flex align-items-center justify-content-center">
-                  <span class="counter-prefix">+</span>
-                  <h5 class="timer display-4 fw-bold m-0" data-to="5120" data-speed="8000">10</h5>
-                </div>
-                <p class="counter-description">Years Experience</p>
-              </div>
-            </div>
-    
-          </div>  
-
-        </div>
-        
-        
-      </div>
     </div>
 </section>
 
-<section id="testimonial" class="padding-medium">
+<section id="testimonial" class="padding-small">
     <div class="container">
         <div class="align-items-center">
             <div class="review-content">
                 <div class="swiper testimonial-swiper">
                     <div class="swiper-wrapper">
                         @foreach($topReviews as $review)
-                            <div class="swiper-slide">
-                                <div class="review-item">
-                                    <div class="review bg-gray border rounded-3 p-4">
-                                        <div class="review-star d-flex mb-2">
-                                            @for($i = 0; $i < $review->stars; $i++)
-                                                <svg class="star me-1 text-warning" width="16" height="16">
-                                                    <use xlink:href="#star" />
-                                                </svg>
+                        <div class="swiper-slide">
+                            <div class="review-item">
+                                <div class="review bg-gray border rounded-3 p-4">
+                                    <div class="review-star d-flex mb-2">
+                                        @for($i = 0; $i < $review->stars; $i++)
+                                            <svg class="star me-1 text-warning" width="16" height="16">
+                                                <use xlink:href="#star" />
+                                            </svg>
                                             @endfor
-                                        </div>
-                                        <blockquote class="mb-0">
-                                            <p class="mb-0">“{{ $review->text }}”</p>
-                                        </blockquote>
                                     </div>
-                                    <div class="author-detail mt-4 d-flex align-items-center">
+                                    <blockquote class="mb-0">
+                                        <p class="mb-0">“{{ $review->text }}”</p>
+                                    </blockquote>
+                                </div>
+                                <div class="author-detail mt-4 d-flex align-items-center">
                                     <!-- <i class="fas fa-user-circle fa-3x me-3"></i> -->
-                                        <div class="author-text">
-                                            <h6 class="name mb-0">{{ $review->user->name }}</h6>
-                                            <span class="time text-capitalize">{{ $review->created_at->diffForHumans() }}</span>
-                                        </div>
+                                    <div class="author-text">
+                                        <h6 class="name mb-0">{{ $review->user->name }}</h6>
+                                        <span
+                                            class="time text-capitalize">{{ $review->created_at->diffForHumans() }}</span>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                         @endforeach
                     </div>
                     <div class="swiper-pagination position-relative pt-5"></div>
@@ -230,165 +303,59 @@
     </div>
 </section>
 
-<section id="about-us" class="position-relative bg-gray padding-small">
-    <div class="container">
-        <div class="row">
-
-            <div class="col-md-6">
-                <div class="imageblock me-4">
-                    <a type="button" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/W_tIumKa8VY"
-                        data-bs-target="#myModal" class="play-btn position-relative">
-                        <img class="img-fluid" src="{{asset  ('assetts') }}/images/about.png" alt="img">
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-md-6 mt-5">
-                <div class="section-title mb-4">
-                    <p class="mb-2 fs-4 text-capitalize">Short Introduction</p>
-                    <h3>Welcome To SuperClean</h3>
-                </div>
-                <p>Welcome to SuperClean Services, your trusted partner for top-tier cleaning solutions. With years of
-                    industry expertise, we are committed to delivering extra cleaning services that exceed your
-                    expectations. Our skilled and dedicated team takes pride in transforming spaces into immaculate
-                    havens, ensuring cleanliness and hygiene for homes and businesses alike.
-                    <br>
-                    <br>
-                    At SuperClean, we prioritize customer satisfaction and tailor our services to meet your specific
-                    needs. Using cutting-edge equipment and eco-friendly products, we leave no detail untouched,
-                    providing thorough and meticulous cleaning for every corner of your space.
-                </p>
-                <a class="btn btn-primary mt-4" href="about.html">Learn More</a>
-            </div>
-
-        </div>
-    </div>
-    <img class="pb-5 position-absolute d-none d-xxl-block end-0 bottom-0 w-auto"
-        src="{{asset  ('assetts') }}/images/bg-pattern-img.png" alt="img">
-</section>
 
 
 
-
-<section id="pricing">
-    <div class="container py-5">
-
-        <div class="section-title mb-5 text-center">
-            <p class="mb-2 fs-4 text-capitalize">Pricing Plans</p>
-            <h3>Our Subscription</h3>
-        </div>
-
-        <div class="row">
-
-            <div class="col-md-4">
-                <div
-                    class="py-5 plan-post d-flex flex-column justify-content-between text-center border rounded-4 text-center my-4">
-                    <div class="plan-top">
-                        <p class="fs-4 text-capitalize text-primary mb-0">Basic</p>
-                        <h2 class="d-inline mb-5">$200</h2><span class="fs-4">/month</span>
-                        <div class="price-option mt-3">
-                            <p><span class="price-tick">✓</span> Quisque rhoncus</p>
-                            <p><span class="price-tick">✓</span> Lorem ipsum dolor</p>
-                            <p><span class="price-tick">✓</span> Vivamus velit mir</p>
-                            <p><span class="price-tick">✓</span> Elit mir ivamus</p>
-                            <p><span class="price-tick">✓</span> Ipsum dolor</p>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-outline mx-auto mt-5">Subscribe</a>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div
-                    class="py-5 plan-post d-flex flex-column justify-content-between text-center border rounded-4 text-center">
-                    <div class="plan-top">
-                        <p class="fs-4 text-capitalize text-primary mb-0">Premium</p>
-                        <h2 class="d-inline mb-5">$300</h2><span class="fs-4">/month</span>
-                        <div class="price-option mt-3">
-                            <p><span class="price-tick">✓</span> Quisque rhoncus</p>
-                            <p><span class="price-tick">✓</span> Lorem ipsum dolor</p>
-                            <p><span class="price-tick">✓</span> Vivamus velit mir</p>
-                            <p><span class="price-tick">✓</span> Elit mir ivamus</p>
-                            <p><span class="price-tick">✓</span> Velit mir</p>
-                            <p><span class="price-tick">✓</span> Quisque rhoncus</p>
-                            <p><span class="price-tick">✓</span> Rhoncus ivamus</p>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-primary mx-auto mt-5">Subscribe</a>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div
-                    class="py-5 plan-post d-flex flex-column justify-content-between text-center border rounded-4 text-center my-4">
-                    <div class="plan-top">
-                        <p class="fs-4 text-capitalize text-primary mb-0">Ultimate</p>
-                        <h2 class="d-inline mb-5">$1600</h2><span class="fs-4">/month</span>
-                        <div class="price-option mt-3">
-                            <p><span class="price-tick">✓</span> Quisque rhoncus</p>
-                            <p><span class="price-tick">✓</span> Lorem ipsum dolor</p>
-                            <p><span class="price-tick">✓</span> Vivamus velit mir</p>
-                            <p><span class="price-tick">✓</span> Elit mir ivamus</p>
-                            <p><span class="price-tick">✓</span> Ipsum dolor</p>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-outline mx-auto mt-5">Subscribe</a>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-</section>
-
-
-<section id="contact-info" class="py-5 bg-accent-gradient">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 d-flex align-items-center">
-                <svg class="star me-1 light-blue-color" width="90" height="90">
-                    <use xlink:href="#call-chat-rounded-outline" />
-                </svg>
-                <div class="contact-info-text ms-3">
-                    <h5 class="text-light mb-0">Give Us Call</h5>
-                    <h5 class="fw-light text-light">123 456 7891</h5>
-                </div>
-            </div>
-            <div class="col-md-4 d-flex align-items-center">
-                <svg class="star me-1 light-blue-color" width="90" height="90">
-                    <use xlink:href="#point-on-map-outline" />
-                </svg>
-                <div class="contact-info-text ms-3">
-                    <h5 class="text-light mb-0">Phoenix, Arizona</h5>
-                    <h5 class="fw-light text-light">947 Dogwood Road</h5>
-                </div>
-            </div>
-            <div class="col-md-4 d-flex align-items-center">
-                <svg class="star me-1 light-blue-color" width="90" height="90">
-                    <use xlink:href="#pen-new-round-outline" />
-                </svg>
-                <div class="contact-info-text ms-3">
-                    <h5 class="text-light mb-0">free quote</h5>
-                    <h5 class="fw-light text-light text-decoration-underline"><a href="quote.html">Request quote</a>
-                    </h5>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 <script>
-
-    document.querySelectorAll('.feature').forEach(function(card) {
-        card.addEventListener('mouseenter', function() {
-            card.style.transform = 'translateY(-10px)';
-            card.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
-            card.style.backgroundColor = '#f8f9fa';
-        });
-        card.addEventListener('mouseleave', function() {
-            card.style.transform = 'translateY(0)';
-            card.style.boxShadow = 'none';
-            card.style.backgroundColor = '';
-        });
+document.querySelectorAll('.feature').forEach(function(card) {
+    card.addEventListener('mouseenter', function() {
+        card.style.transform = 'translateY(-10px)';
+        card.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+        card.style.backgroundColor = '#f8f9fa';
     });
+    card.addEventListener('mouseleave', function() {
+        card.style.transform = 'translateY(0)';
+        card.style.boxShadow = 'none';
+        card.style.backgroundColor = '';
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const counters = document.querySelectorAll('.timer');
+
+    const startCounter = (counter) => {
+        const target = +counter.getAttribute('data-to');
+        const speed = 200; // Speed of the animation
+        const updateCount = () => {
+            const count = +counter.innerText;
+            const increment = target / speed;
+
+            if (count < target) {
+                counter.innerText = Math.ceil(count + increment);
+                setTimeout(updateCount, 10);
+            } else {
+                counter.innerText = target;
+            }
+        };
+        updateCount();
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                startCounter(entry.target);
+                observer.unobserve(entry.target); // Ensure animation runs only once
+            }
+        });
+    }, {
+        threshold: 0.75 // Trigger when 75% of the element is visible
+    });
+
+    counters.forEach(counter => {
+        observer.observe(counter);
+    });
+});
 </script>
 
 @endsection

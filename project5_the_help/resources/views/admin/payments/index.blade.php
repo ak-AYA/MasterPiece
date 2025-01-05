@@ -79,9 +79,9 @@
 <div class="container mt-4">
     <div class="page-header d-flex justify-content-between align-items-center bg-light p-3 mb-4 rounded">
         <h2>Payment Management</h2>
-        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addPaymentModal">
+        <!-- <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addPaymentModal">
             Add New Payment
-        </button>
+        </button> -->
     </div>
 
     @if(session('success'))
@@ -95,7 +95,6 @@
                     <th>#</th>
                     <th>Name</th>
                     <th>Description</th>
-                    <th>Logo</th>
                     <th>Status</th>
                     <th>Actions</th>
                 </tr>
@@ -106,13 +105,6 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $payment->name }}</td>
                     <td>{{ $payment->description }}</td>
-                    <td>
-                        @if($payment->logo_url)
-                        <img src="{{ asset('storage/' . $payment->logo_url) }}" class="rounded img-80">
-                        @else
-                        <span>No logo</span>
-                        @endif
-                    </td>
                     <td class="text-center">
                         @if($payment->is_active)
                         <i class="fas fa-check-circle text-success"></i>
@@ -197,8 +189,8 @@
                             <textarea class="form-control" id="edit_description" name="description"></textarea>
                         </div>
                         <!-- Add the image preview inside the modal body -->
-                        <div class="mb-3">
-                            <label for="current_logo_preview" class="form-label">Current Logo</label>
+                        <div class="mb-3" hidden>
+                            <label for="current_logo_preview" class="form-label" >Current Logo</label>
                             <img id="current_logo_preview" src="" alt="Current Logo" class="img-fluid" />
                         </div>
                         <div class="mb-3">

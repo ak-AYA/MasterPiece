@@ -23,74 +23,70 @@ class UserBookingController extends Controller
 
     public function processBooking(Request $request)
     {
-            $request->validate([
-                'date' => 'required|date|after_or_equal:today',
-                'time' => 'required',
-                'payment_id' => 'required|exists:payments,id',
-                'service_id' => 'required|exists:services,id'
-            ]);
+        $request->validate([
+            'date' => 'required|date|after_or_equal:today',
+            'time' => 'required',
+            'payment_id' => 'required|exists:payments,id',
+            'service_id' => 'required|exists:services,id'
+        ]);
     
-            $user = Auth::user();
-            $service = Service::findOrFail($request->service_id);
-            
-            $booking = Booking::create([
-                'user_id' => $user->id,
-                'service_id' => $service->id,
-                'date' => $request->date,
-                'time' => $request->time,
-                'status' => 'pending',
-                'total_price' => $service->price,
-                'payment_id' => $request->payment_id,
-            ]);
+        $user = Auth::user();
+        $service = Service::findOrFail($request->service_id);
+        
+        $booking = Booking::create([
+            'user_id' => $user->id,
+            'service_id' => $service->id,
+            'date' => $request->date,
+            'time' => $request->time,
+            'status' => 'pending',
+            'total_price' => $service->price,
+            'payment_id' => $request->payment_id,
+        ]);
     
-            return response()->json([
-                'success' => true,
-                'booking_id' => $booking->id
-            ]);
+        return view('website.invoice', compact('user', 'service', 'booking')); // Directly return a view after booking
     }
+    
     
     public function processStripePayment(Request $request)
     {
-            $request->validate([
-                'payment_method_id' => 'required|string',
-                'booking_id' => 'required|exists:bookings,id',
+        $request->validate([
+            'payment_method_id' => 'required|string',
+            'booking_id' => 'required|exists:bookings,id',
+        ]);
+    
+        $booking = Booking::findOrFail($request->booking_id);
+    
+        try {
+            Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
+    
+            $paymentIntent = PaymentIntent::create([
+                'amount' => (int)($booking->total_price * 100),
+                'currency' => 'jod',
+                'payment_method' => $request->payment_method_id,
+                'confirm' => true,
+                'return_url' => route('user.booking.invoice', ['bookingId' => $booking->id]),
+                'automatic_payment_methods' => [
+                    'enabled' => true,
+                    'allow_redirects' => 'never'
+                ]
             ]);
     
-            $booking = Booking::findOrFail($request->booking_id);
-    
-            try {
-                Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
-    
-                $paymentIntent = PaymentIntent::create([
-                    'amount' => (int)($booking->total_price * 100),
-                    'currency' => 'jod',
-                    'payment_method' => $request->payment_method_id,
-                    'confirm' => true,
-                    'return_url' => route('user.booking.invoice', ['bookingId' => $booking->id]),
-                    'automatic_payment_methods' => [
-                        'enabled' => true,
-                        'allow_redirects' => 'never'
-                    ]
-                ]);
-    
-                if ($paymentIntent->status === 'succeeded') {
-                    $booking->update(['status' => 'confirmed']);
-                    
-                    return redirect()->route('user.booking.invoice', ['bookingId' => $booking->id]);
-                }
-                
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Payment failed'
-                ]);
-    
-            } catch (\Exception $e) {
-                return response()->json([
-                    'success' => false,
-                    'message' => $e->getMessage()
-                ]);
+            if ($paymentIntent->status === 'succeeded') {    
+                // إعادة التوجيه إلى صفحة الفاتورة
+                return redirect()->route('user.booking.invoice', ['bookingId' => $booking->id]);
             }
+    
+            // في حال فشل الدفع
+            return redirect()->route('user.booking.invoice', ['bookingId' => $booking->id])
+                             ->with('error', 'Payment failed');
+    
+        } catch (\Exception $e) {
+            // في حال حدوث خطأ
+            return redirect()->route('user.booking.invoice', ['bookingId' => $booking->id])
+                             ->with('error', $e->getMessage());
+        }
     }
+    
 
 
     public function showInvoice($bookingId)

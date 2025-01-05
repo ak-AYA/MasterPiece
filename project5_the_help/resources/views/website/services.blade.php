@@ -41,7 +41,7 @@
 }
 </style>
 
-<section id="our-services" class="text-center mt-5 pt-4">
+<section id="our-services" class="text-center mt-5 pt-5">
     <div class="container mt-5">
         <div class="row">
             <!-- Categories Sidebar -->
@@ -75,18 +75,7 @@
                         </ul>
                     </div>
 
-                    <!-- Have Any Questions Section -->
-                    <div class="widget sidebar-any-questions bg-gray border rounded-3 p-3">
-                        <h5 class="widget-title text-uppercase border-bottom pb-3 mb-3">Have any questions?</h5>
-                        <form action="#" method="POST">
-                            <input type="text" name="name" placeholder="Full Name" class="form-control mb-3" required>
-                            <input type="email" name="email" placeholder="Email" class="form-control mb-3" required>
-                            <textarea name="details" placeholder="Details" rows="4" class="form-control mb-3"
-                                required></textarea>
-                            <button type="submit"
-                                class="btn btn-primary btn-block btn-pill text-uppercase">Submit</button>
-                        </form>
-                    </div>
+                
                 </div>
             </div>
 
@@ -152,7 +141,7 @@
 
             </div>
 
-            <nav aria-label="Page navigation" class="d-flex justify-content-center mt-4">
+            <nav aria-label="Page navigation" class="d-flex justify-content-center mt-4 mb-5">
                 {{ $services->links() }}
             </nav>
         </div>

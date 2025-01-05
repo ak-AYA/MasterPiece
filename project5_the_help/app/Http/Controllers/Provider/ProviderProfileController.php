@@ -17,9 +17,10 @@ class ProviderProfileController extends Controller
     public function index()
     {
         $provider = Auth::user(); 
+        $providerId = Auth::id();
         $categories = Category::all(); 
-        $reviews = Review::all(); 
-        $services = Service::with('category')->where('provider_id', Auth::id())->get();  // إضافة شرط لجلب خدمات البروفايدر فقط
+        $reviews = Review::where('provider_id', $providerId)->get();
+        $services = Service::with('category')->where('provider_id', Auth::id())->get();  
         $bookings = Booking::whereHas('service', function ($query) {
             $query->where('provider_id', auth()->id());  
         })->get();
@@ -88,38 +89,30 @@ class ProviderProfileController extends Controller
 
     public function updateService(Request $request, $serviceId)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string|max:1000',
-            'duration' => 'nullable|string|max:50',
-            'price' => 'required|numeric|regex:/^\d+(\.\d{1,2})?$/',
-            'category_id' => 'exists:categories,id',
-            'status' => 'required|in:1,0',
-            'image' => 'nullable|image|max:2048',  
-        ]);
+            $service = Service::find($serviceId);
         
-        // Get the service from the database
-        $service = Service::where('id', $serviceId)
-                          ->where('provider_id', auth()->id()) 
-                          ->firstOrFail(); 
-    
-        // Check if there is an image in the request
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->storeAs('assetts/images/services', $request->file('image')->getClientOriginalName(), 'public');
-            $service->image = $imagePath;
-        }
-    
-        // Update the other fields
-        $service->update([
-            'name' => $request->name,
-            'description' => $request->description,
-            'category_id' => $request->category_id,
-            'duration' => $request->duration,
-            'price' => $request->price,
-            'status' => $request->status,
-        ]);
-    
-        return redirect()->route('provider.provider.profile')->with('success', 'Service updated successfully!');
+            if ($request->hasFile('image')) {
+                $request->validate([
+                    'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                ]);
+        
+                $image = $request->file('image');
+                $imageName = time().'.'.$image->getClientOriginalExtension();
+                $image->move(public_path('images/services'), $imageName);
+            } else {
+                $imageName = $service->image; // Keep the existing image if no new image is uploaded
+            }
+        
+                $service->name = $request->input('name');
+                $service->category_id = $request->input('category_id');
+                $service->description = $request->input('description');
+                $service->duration = $request->input('duration');
+                $service->price = $request->input('price');
+                $service->status = $request->input('status');
+                $service->image = $imageName; // Save the new or existing image
+                $service->save();
+        
+        return redirect()->route('provider.provider.profile')->with('success', __('Service updated successfully.'));
     }
 
     // Display the provider's services
@@ -169,7 +162,7 @@ class ProviderProfileController extends Controller
         if ($request->status === 'cancelled' && $currentStatus !== 'completed') {
             $booking->status = 'cancelled';
             $booking->save();
-            return redirect()->with('success', 'Booking status updated to Cancelled.');
+            return redirect()->back()->with('success', 'Booking status updated to Cancelled.');
         }
     
 
@@ -182,8 +175,6 @@ class ProviderProfileController extends Controller
     
         return redirect()->back()->with('success', 'Booking status updated successfully!');
     }
-    
-    
-        
+   
     
 }

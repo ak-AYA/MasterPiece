@@ -10,32 +10,37 @@ class ServicesController extends Controller
 {
     public function index(Request $request)
     {
-
-        $categories = Category::all();
+        $categories = Category::where('status', 1)->get();
         $selectedCategoryId = $request->query('category_id');
         $searchQuery = $request->query('query');
-
+    
         if ($selectedCategoryId) {
-            $services = Service::where('category_id', $selectedCategoryId);
+            
+            $services = Service::where('category_id', $selectedCategoryId)
+                               ->whereHas('provider', function($query) {
+                                   $query->where('status', 1); 
+                               });
         } else {
-            $services = Service::query(); 
+            $services = Service::query()->whereHas('provider', function($query) {
+                $query->where('status', 1);  
+            });
         }
     
-            // search
+
         if ($searchQuery) {
             $services = $services->where('name', 'like', "%{$searchQuery}%")
                                  ->orWhere('description', 'like', "%{$searchQuery}%");
         }
-    
 
         $services = $services->paginate(9);
-    
+
         foreach ($services as $service) {
             $service->providerRating = $service->provider->reviews()->avg('stars');
         }
     
         return view('website.services', compact('categories', 'services', 'selectedCategoryId', 'searchQuery'));
     }
+    
     
     // Show services by category ID
     public function showServicesByCategory($id)

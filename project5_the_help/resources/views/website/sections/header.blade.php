@@ -6,7 +6,7 @@
 <nav id="primary-header" class="navbar navbar-expand-lg py-3 fixed-header">
     <div class="container">
         <a class="navbar-brand" href="{{ route('website.index') }}">
-            <img src="{{ asset('assetts/images/Black White Minimalist Cleaning Company Logo.png') }}" 
+            <img src="{{ asset('assetts/images/logo-png.png') }}" 
                  class="logo img-fluid" 
                  style="height: 60px; width: auto; object-fit: contain;">
         </a>
@@ -33,6 +33,17 @@
                         <a class="nav-link {{ Route::currentRouteName() == 'website.services.index' ? 'active' : '' }}" 
                            href="{{ route('website.services.index') }}">Services</a>
                     </li>
+                    <!-- About Link -->
+                    <li class="nav-item px-3">
+                        <a class="nav-link {{ Route::currentRouteName() == 'website.about.index' ? 'active' : '' }}" 
+                           href="{{ route('website.about.index') }}">About Us</a>
+                    </li>
+                    <!-- Contact Link -->
+                    <li class="nav-item px-3">
+                        <a class="nav-link {{ Route::currentRouteName() == 'website.contact.index' ? 'active' : '' }}" 
+                           href="{{ route('website.contact.index') }}">Contact</a>
+                    </li>
+ 
                     <!-- User/Provider Dropdown -->
                     @if(Auth::guard('provider')->check())
                         <li class="nav-item px-3 dropdown">

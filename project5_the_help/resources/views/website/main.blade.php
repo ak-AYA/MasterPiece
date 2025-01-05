@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 
-@include('website.sections.head');
+@include('website.sections.head')
 
 <body>
 
@@ -93,7 +93,7 @@
       <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
     </symbol>
   </svg>
-  @include('website.sections.header');
+  @include('website.sections.header')
 
   <main>
 
@@ -102,8 +102,8 @@
   </main>
  
   
-  @include('website.sections.footer');
-  @include('website.sections.scripts');
+  @include('website.sections.footer')
+  @include('website.sections.scripts')
 
   <!-- Video Popup -->
   <!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

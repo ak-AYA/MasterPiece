@@ -24,6 +24,6 @@ class HomeController extends Controller
     public function index()
     {
         // return 'im aya';
-        return view('home');
+        return view('layouts/app');
     }
 }

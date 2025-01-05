@@ -64,7 +64,7 @@
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 
     <!-- Navbar Brand-->
-    <span class="navbar-brand ps-3">The Help Dashboard</span>
+    <span class="navbar-brand ps-3">The Help </span>
 
     <!-- Navbar Content Wrapper -->
     <div class="d-flex w-100 justify-content-between align-items-center">
