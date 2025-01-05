@@ -73,10 +73,8 @@
     </div>
 </section>
 
-<!-- SweetAlert CSS (يجب أن تضيفه داخل <head> في صفحة HTML الخاصة بك) -->
-<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.23/dist/sweetalert2.min.css" rel="stylesheet">
 
-<!-- SweetAlert JavaScript (يجب أن تضيفه في أسفل الصفحة أو في مكان مناسب بعد تحميل الصفحة) -->
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.23/dist/sweetalert2.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.23/dist/sweetalert2.min.js"></script>
 
 <script>
@@ -86,13 +84,13 @@
         // Reset previous errors
         resetErrors();
 
-        // Simulate backend email and password check (you need to handle this in PHP or your backend logic)
+        
         let isValid = true;
 
         const email = document.getElementById("userEmail").value;
         const password = document.getElementById("userPassword").value;
 
-        // Simple client-side validation for demonstration purposes
+
         if (!validateEmail(email)) {
             document.getElementById("userEmailError").classList.remove("d-none");
             isValid = false;
@@ -104,8 +102,8 @@
         }
 
         if (isValid) {
-            // If the email and password are valid, proceed to submit the form
-            this.submit();  // Submit the form to the server
+  
+            this.submit();  
         } else {
             // Show SweetAlert error message
             Swal.fire({

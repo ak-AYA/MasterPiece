@@ -3,42 +3,42 @@
 @section('content')
 
 <style>
-.sidebar-categories li.active a {
-    font-weight: bold;
-    color: #EE8E1E !important;
-    text-decoration: none;
-}
+    .sidebar-categories li.active a {
+        font-weight: bold;
+        color: #EE8E1E !important;
+        text-decoration: none;
+    }
 
-.search-box .input-group {
-    max-width: 400px;
-    border: 1px solid #ddd;
-    border-radius: 25px;
-    overflow: hidden;
-    background-color: #f9f9f9;
-    transition: box-shadow 0.3s ease;
-}
+    .search-box .input-group {
+        max-width: 400px;
+        border: 1px solid #ddd;
+        border-radius: 25px;
+        overflow: hidden;
+        background-color: #f9f9f9;
+        transition: box-shadow 0.3s ease;
+    }
 
-.search-box .input-group:hover {
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
+    .search-box .input-group:hover {
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
 
-.search-box input.form-control {
-    border: none;
-    background: transparent;
-    border-radius: 0;
-}
+    .search-box input.form-control {
+        border: none;
+        background: transparent;
+        border-radius: 0;
+    }
 
-.search-box input.form-control:focus {
-    box-shadow: none;
-    outline: none;
-}
+    .search-box input.form-control:focus {
+        box-shadow: none;
+        outline: none;
+    }
 
-.search-box button {
-    border: none;
-    border-radius: 0;
-    color: white;
-    transition: background-color 0.3s ease;
-}
+    .search-box button {
+        border: none;
+        border-radius: 0;
+        color: white;
+        transition: background-color 0.3s ease;
+    }
 </style>
 
 <section id="our-services" class="text-center mt-5 pt-5">
