@@ -72,16 +72,16 @@ class UserBookingController extends Controller
             ]);
     
             if ($paymentIntent->status === 'succeeded') {    
-                // إعادة التوجيه إلى صفحة الفاتورة
+             
                 return redirect()->route('user.booking.invoice', ['bookingId' => $booking->id]);
             }
     
-            // في حال فشل الدفع
+       
             return redirect()->route('user.booking.invoice', ['bookingId' => $booking->id])
                              ->with('error', 'Payment failed');
     
         } catch (\Exception $e) {
-            // في حال حدوث خطأ
+            
             return redirect()->route('user.booking.invoice', ['bookingId' => $booking->id])
                              ->with('error', $e->getMessage());
         }

@@ -15,7 +15,7 @@ class BookingController extends Controller
     // Show all bookings (for admin)
     public function index()
     {
-        $bookings = Booking::with(['user', 'service', 'payment', 'discount'])->get();
+        $bookings = Booking::with(['user', 'service', 'payment' ])->get();
         $users = User::all();
         $services = Service::all();
         $payments = Payment::all();

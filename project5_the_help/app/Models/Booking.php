@@ -39,13 +39,10 @@ class Booking extends Model
         return $this->belongsTo(Payment::class, 'payment_id');
     }
     
-    public function discount()
-    {
-        return $this->belongsTo(Discount::class);
-    }
+
     public function reviews()
     {
-        return $this->hasMany(Review::class); 
+        return $this->hasOne(Review::class);
     }
 
 }
